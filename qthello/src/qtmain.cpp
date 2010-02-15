@@ -5,6 +5,7 @@
 #include <QApplication>
 #include <QPushButton>
 
+// sup ?
 int main(int argc, char *argv[])
 {
 	QApplication app(argc, argv);
