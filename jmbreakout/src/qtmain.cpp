@@ -1,16 +1,36 @@
+#include <QtGui>
+#include "breakout.h"
+#include <math.h>
+
+ int main(int argc, char **argv)
+ {
+     QApplication app(argc, argv);
+     qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));
+
+     Breakout breakout;
+     breakout.setSceneRect(0,0, 800, 480);
+     breakout.setItemIndexMethod(QGraphicsScene::NoIndex);
 /*
- * Created: 02/15/10-13:16:19
- * Author: keras
- */
-#include <QApplication>
-#include <QPushButton>
+     for (int i = 0; i < MouseCount; ++i) {
+         Mouse *mouse = new Mouse;
+         mouse->setPos(::sin((i * 6.28) / MouseCount) * 200,
+                       ::cos((i * 6.28) / MouseCount) * 200);
+         breakout.addItem(mouse);
+     }
+*/
+     QGraphicsView view(&breakout);
+     //view.setRenderHint(QPainter::Antialiasing);
+     view.setBackgroundBrush(QPixmap(":/images/bg.png"));
+     view.setCacheMode(QGraphicsView::CacheBackground);
+     view.setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
+     view.setDragMode(QGraphicsView::ScrollHandDrag);
+     view.setWindowTitle(QT_TRANSLATE_NOOP(QGraphicsView, "BreakOut"));
+     view.resize(800, 480);
+     view.show();
 
-int main(int argc, char *argv[])
-{
-	QApplication app(argc, argv);
+     QTimer timer;
+     QObject::connect(&timer, SIGNAL(timeout()), &breakout, SLOT(advance()));
+     timer.start(1000 / 33);
 
-	QPushButton hello("Hello world!");
-
-	hello.show();
-	return app.exec();
-}
+     return app.exec();
+ }
