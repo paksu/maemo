@@ -9,11 +9,11 @@
 
 class Breakout : public QGraphicsScene
 {
-    public:
-        Breakout();
-        void paint(QPainter painter);
+public:
+    Breakout();
+    void paint(QPainter painter);
 
-    protected:
-        int read_acc();
-    private:
+    static int read_acc();
+
+private:
 };

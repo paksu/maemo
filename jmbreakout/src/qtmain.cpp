@@ -1,5 +1,6 @@
 #include <QtGui>
 #include "breakout.h"
+#include "paddle.h"
 #include <math.h>
 
  int main(int argc, char **argv)
@@ -18,6 +19,10 @@
          breakout.addItem(mouse);
      }
 */
+     Paddle* paddle = new Paddle();
+     breakout.addItem((QGraphicsRectItem*) paddle);
+
+
      QGraphicsView view(&breakout);
      //view.setRenderHint(QPainter::Antialiasing);
      view.setBackgroundBrush(QPixmap(":/images/bg.png"));
@@ -30,7 +35,7 @@
 
      QTimer timer;
      QObject::connect(&timer, SIGNAL(timeout()), &breakout, SLOT(advance()));
-     timer.start(1000 / 33);
+     timer.start(100 / 25);
 
      return app.exec();
  }
