@@ -1,6 +1,11 @@
 #include <QtGui>
-#include "breakout.h"
+
+
 #include <math.h>
+
+#include "breakout.h"
+#include "ball.h"
+
 
  int main(int argc, char **argv)
  {
@@ -10,6 +15,9 @@
      Breakout breakout;
      breakout.setSceneRect(0,0, 800, 480);
      breakout.setItemIndexMethod(QGraphicsScene::NoIndex);
+
+     Ball ball;
+     breakout.addItem(&ball);
 /*
      for (int i = 0; i < MouseCount; ++i) {
          Mouse *mouse = new Mouse;
@@ -19,14 +27,17 @@
      }
 */
      QGraphicsView view(&breakout);
-     //view.setRenderHint(QPainter::Antialiasing);
+     view.setRenderHint(QPainter::Antialiasing);
      view.setBackgroundBrush(QPixmap(":/images/bg.png"));
      view.setCacheMode(QGraphicsView::CacheBackground);
-     view.setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
-     view.setDragMode(QGraphicsView::ScrollHandDrag);
+     view.setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
+     view.setDragMode(QGraphicsView::NoDrag);
+     view.setFrameStyle(QGraphicsView::NoFrame);
+     view.setResizeAnchor(QGraphicsView::NoAnchor);
      view.setWindowTitle(QT_TRANSLATE_NOOP(QGraphicsView, "BreakOut"));
      view.resize(800, 480);
      view.show();
+
 
      QTimer timer;
      QObject::connect(&timer, SIGNAL(timeout()), &breakout, SLOT(advance()));

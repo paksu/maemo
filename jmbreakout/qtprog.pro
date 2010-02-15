@@ -1,7 +1,10 @@
 TARGET = jmbreakout
-HEADERS += src/breakout.h
+HEADERS += src/breakout.h \
+    src/ball.h \
+    src/vector2d.h
 SOURCES += src/qtmain.cpp \
-    src/breakout.cpp
+    src/breakout.cpp \
+    src/ball.cpp
 FORMS += 
 
 # LEXS#
