@@ -5,8 +5,6 @@
 
 
 #include <math.h>
-
-#include "breakout.h"
 #include "ball.h"
 
 

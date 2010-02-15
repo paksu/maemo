@@ -1,10 +1,10 @@
 TARGET = jmbreakout
 HEADERS += src/breakout.h \
-    src/paddle.h
-    src/paddle.cpp
+    src/paddle.h \
     src/ball.h \
     src/vector2d.h
 SOURCES += src/qtmain.cpp \
+    src/paddle.cpp \
     src/breakout.cpp \
     src/ball.cpp
 FORMS += 

@@ -17,6 +17,4 @@ private:
     double speed, width;
 };
 
-//} // namespace Breakout
-
 #endif // PADDLE_H
