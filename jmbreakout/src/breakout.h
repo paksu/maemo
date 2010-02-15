@@ -4,6 +4,7 @@
 #include <QGraphicsScene>
 #include <QPainter>
 
+#include "vector2d.h"
 #endif // BREAKOUT_H
 
 
