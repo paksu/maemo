@@ -1,15 +1,12 @@
 #include "breakout.h"
 #include <QFile>
 #include <QDebug>
+#include <math.h>
 
+int Breakout::acc_cache = 0;
 
 Breakout::Breakout()
 {
-}
-
-void Breakout::paint(QPainter painter)
-{
-
 }
 
 int Breakout::read_acc()
@@ -22,7 +19,7 @@ int Breakout::read_acc()
         f.close();
         ans = -arr.left(arr.indexOf(' ')).toInt();
     } else {
-        ans = rand()%2000+1000;
+        ans = ::sin((double)acc_cache++ / 100)*400;
     }
     return ans;
 }

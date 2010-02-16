@@ -5,16 +5,15 @@
 #include <QPainter>
 
 #include "vector2d.h"
-#endif // BREAKOUT_H
-
 
 class Breakout : public QGraphicsScene
 {
 public:
     Breakout();
-    void paint(QPainter painter);
-
     static int read_acc();
 
 private:
+    static int acc_cache;
 };
+
+#endif // BREAKOUT_H
