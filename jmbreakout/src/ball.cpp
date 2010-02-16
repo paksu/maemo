@@ -11,6 +11,7 @@ Ball::Ball()
     speed.x = 1;
     speed.y = 1;
     size = 10;
+    setRect(0,0,size*2,size*2);
 
 }
 
@@ -27,7 +28,7 @@ void Ball::advance(int step)
        speed.y *= -1;
    }
 
-   qDebug() << "x" << pos.x << "y" << pos.y;
+   //qDebug() << "x" << pos.x << "y" << pos.y;
    setPos(QPointF(pos.x, pos.y));
 }
 
@@ -36,4 +37,12 @@ void Ball::paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QW
     painter->setBrush(color);
     painter->drawEllipse(0, 0, size, size);
     //qDebug() << "x" << pos.x << "y" << pos.y;
+}
+
+QRectF Ball::boundingRect() const
+{
+    qDebug() << rect();
+    //return QRectF(0, 0, size, size);
+
+    return rect();
 }
