@@ -17,12 +17,10 @@
      Ball ball;
      breakout.addItem(&ball);
 
-     Paddle* paddle = new Paddle();
-     breakout.addItem((QGraphicsRectItem*) paddle);
+     breakout.addPaddle(new Paddle());
 
 
      QGraphicsView view(&breakout);
-     view.setRenderHint(QPainter::Antialiasing);
      view.setBackgroundBrush(QPixmap(":/images/bg.png"));
      view.setCacheMode(QGraphicsView::CacheBackground);
      view.setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);

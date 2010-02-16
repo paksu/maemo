@@ -21,7 +21,7 @@ class Ball : public QGraphicsEllipseItem
     protected:
         void advance(int step);
     private:
-        QColor color;
+        void handleCollision();
 
 };
 
