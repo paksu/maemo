@@ -2,11 +2,8 @@
 #include "breakout.h"
 #include "paddle.h"
 
-
-
 #include <math.h>
 #include "ball.h"
-
 
  int main(int argc, char **argv)
  {
@@ -14,19 +11,12 @@
      qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));
 
      Breakout breakout;
-     breakout.setSceneRect(0,0, 800, 480);
+     breakout.setSceneRect(0,0, Breakout::get_w(), Breakout::get_h());
      breakout.setItemIndexMethod(QGraphicsScene::NoIndex);
 
      Ball ball;
      breakout.addItem(&ball);
-/*
-     for (int i = 0; i < MouseCount; ++i) {
-         Mouse *mouse = new Mouse;
-         mouse->setPos(::sin((i * 6.28) / MouseCount) * 200,
-                       ::cos((i * 6.28) / MouseCount) * 200);
-         breakout.addItem(mouse);
-     }
-*/
+
      Paddle* paddle = new Paddle();
      breakout.addItem((QGraphicsRectItem*) paddle);
 
@@ -40,7 +30,7 @@
      view.setFrameStyle(QGraphicsView::NoFrame);
      view.setResizeAnchor(QGraphicsView::NoAnchor);
      view.setWindowTitle(QT_TRANSLATE_NOOP(QGraphicsView, "BreakOut"));
-     view.resize(800, 480);
+     view.resize(Breakout::get_w(), Breakout::get_h());
      view.show();
 
 
