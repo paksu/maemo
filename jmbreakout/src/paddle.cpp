@@ -15,7 +15,7 @@ void Paddle::advance(int)
 
 void Paddle::paint(QPainter * painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
-    painter->drawRect(-width/2, 0, width, 20);
+    painter->drawRect(rect());
 }
 
 QRectF Paddle::boundingRect() const

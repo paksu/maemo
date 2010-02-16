@@ -8,8 +8,8 @@ Ball::Ball()
     pos.y = 10;
     color =  QColor(qrand() % 256, qrand() % 256, qrand() % 256);
     speed = Vector2D();
-    speed.x = 1;
-    speed.y = 1;
+    speed.x = 10;
+    speed.y = 10;
     size = 10;
     setRect(0,0,size*2,size*2);
 
