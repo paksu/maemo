@@ -17,6 +17,7 @@ class Ball : public QGraphicsEllipseItem
         Vector2D speed;
         double size;
         void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget);
+        QRectF boundingRect() const;
     protected:
         void advance(int step);
     private:

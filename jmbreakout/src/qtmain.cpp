@@ -25,13 +25,16 @@
      view.setRenderHint(QPainter::Antialiasing);
      view.setBackgroundBrush(QPixmap(":/images/bg.png"));
      view.setCacheMode(QGraphicsView::CacheBackground);
-     view.setViewportUpdateMode(QGraphicsView::FullViewportUpdate);
+     view.setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
      view.setDragMode(QGraphicsView::NoDrag);
      view.setFrameStyle(QGraphicsView::NoFrame);
      view.setResizeAnchor(QGraphicsView::NoAnchor);
      view.setWindowTitle(QT_TRANSLATE_NOOP(QGraphicsView, "BreakOut"));
      view.resize(Breakout::get_w(), Breakout::get_h());
+     // DONT DO IT
+     //view.showFullScreen();
      view.show();
+
 
 
      QTimer timer;
