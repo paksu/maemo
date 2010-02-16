@@ -6,7 +6,8 @@ HEADERS += src/breakout.h \
 SOURCES += src/qtmain.cpp \
     src/paddle.cpp \
     src/breakout.cpp \
-    src/ball.cpp
+    src/ball.cpp \
+    src/vector2d.cpp
 FORMS += 
 
 # LEXS#

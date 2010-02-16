@@ -9,7 +9,7 @@ Ball::Ball()
     color =  QColor(qrand() % 256, qrand() % 256, qrand() % 256);
     speed = Vector2D();
     speed.x = 1;
-    speed.y = 3;
+    speed.y = 1;
     size = 10;
 
 }
@@ -17,8 +17,8 @@ Ball::Ball()
 void Ball::advance(int step)
 {
    if(!step) return;
-   pos.x += speed.x;
-   pos.y += speed.y;
+   pos += speed;
+
    //qDebug() << "x" << pos.x << "y" << pos.y;
    setPos(QPointF(pos.x, pos.y));
 }
