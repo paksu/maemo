@@ -18,3 +18,7 @@ void Paddle::paint(QPainter * painter, const QStyleOptionGraphicsItem *, QWidget
     painter->drawRect(-width/2, 0, width, 20);
 }
 
+QRectF Paddle::boundingRect() const
+{
+    return rect();
+}
