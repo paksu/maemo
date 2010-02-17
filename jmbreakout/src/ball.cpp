@@ -35,6 +35,7 @@ void Ball::advance(int step)
     }
    pos += speed;
    //qDebug() << "x" << pos.x << "y" << pos.y;
+   //foobar
    setPos(QPointF(pos.x, pos.y));
 }
 
