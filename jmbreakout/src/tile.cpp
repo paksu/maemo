@@ -8,8 +8,7 @@ Tile::Tile(int x, int y)
 
 void Tile::paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget *)
 {
-    //painter->drawPixmap(0,0,QPixmap(":/images/ball.png"));
-    //hitbox
+
     painter->drawRect(rect());
 }
 
@@ -21,4 +20,9 @@ QRectF Tile::boundingRect() const
 int Tile::type() const
 {
     return Type;
+}
+
+void Tile::collision(Ball* ball)
+{
+
 }

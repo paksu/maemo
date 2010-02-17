@@ -4,7 +4,8 @@ HEADERS += src/breakout.h \
     src/ball.h \
     src/vector2d.h \
     src/tile.h \
-    src/bonus.h
+    src/bonus.h \
+    src/colliding.h
 SOURCES += src/qtmain.cpp \
     src/paddle.cpp \
     src/breakout.cpp \
