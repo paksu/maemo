@@ -17,8 +17,7 @@
      Ball ball;
      breakout.addItem(&ball);
 
-     Paddle* paddle = new Paddle();
-     breakout.addItem((QGraphicsRectItem*) paddle);
+     breakout.addPaddle(new Paddle());
 
 
      QGraphicsView view(&breakout);

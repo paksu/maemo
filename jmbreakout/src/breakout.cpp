@@ -32,3 +32,12 @@ int Breakout::get_w() {
 int Breakout::get_h() {
     return AREA_H;
 }
+
+void Breakout::addPaddle(Paddle *newPaddle) {
+    paddle = newPaddle;
+    addItem((QGraphicsRectItem*) newPaddle);
+}
+
+const Paddle & Breakout::getPaddle() {
+    return *paddle;
+}

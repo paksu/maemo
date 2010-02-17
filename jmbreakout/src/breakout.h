@@ -5,6 +5,7 @@
 #include <QPainter>
 
 #include "vector2d.h"
+#include "paddle.h"
 
 #define AREA_W 800
 #define AREA_H 480
@@ -16,9 +17,11 @@ public:
     static int read_acc();
     static int get_w();
     static int get_h();
-
+    const Paddle & getPaddle();
+    void addPaddle(Paddle *paddle);
 private:
     static int acc_cache;
+    Paddle *paddle;
 };
 
 #endif // BREAKOUT_H
