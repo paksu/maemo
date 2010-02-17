@@ -3,11 +3,11 @@
 
 #include "vector2d.h"
 
-Vector2D()
+Vector2D::Vector2D()
     : x(0),y(0)
 {}
 
-Vector2D(double x, double y)
+Vector2D::Vector2D(double x, double y)
     : x(x), y(y)
 {}
 
