@@ -4,6 +4,7 @@
 
 #include <math.h>
 #include "ball.h"
+#include "tile.h"
 
  int main(int argc, char **argv)
  {
@@ -16,7 +17,9 @@
 
      Ball ball;
      breakout.addItem(&ball);
-
+     for(int i = 0;i < 20;i++) {
+         breakout.addItem(new Tile(i,1));
+     }
      breakout.addPaddle(new Paddle());
 
 
