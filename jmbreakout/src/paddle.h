@@ -3,14 +3,17 @@
 
 #include <QGraphicsItem>
 #include <QPainter>
+#include "colliding.h"
 
-class Paddle : public QGraphicsRectItem
+class Paddle : public QGraphicsRectItem, public Colliding
 {
 public:
     Paddle();
-    void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget = 0);
+    void paint(QPainter * painter, const QStyleOptionGraphicsItem *, QWidget * = 0);
     double getSpeed();
     bool getDirection();
+    Vector2D collision(Ball const* ball);
+    QRectF boundingRect() const;
 protected:
     void advance(int phase);
 private:

@@ -9,11 +9,12 @@
 
 #include "vector2d.h"
 
+class CollidingGraphicsItem;
+
 class Ball : public QGraphicsEllipseItem
 {
     public:
         Ball();
-        Vector2D pos;
         Vector2D speed;
         double size;
         void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget);
@@ -22,6 +23,7 @@ class Ball : public QGraphicsEllipseItem
         void advance(int step);
     private:
         void handleCollision();
+        Vector2D getCollisionNormal(QGraphicsItem const* item) const;
 
 };
 

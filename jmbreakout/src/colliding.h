@@ -2,11 +2,13 @@
 #define COLLIDING_H
 
 #include "ball.h"
+#include "vector2d.h"
 
-class Collidable
+class Colliding
 {
 public:
-    virtual void collision(Ball* ball) = 0;
+    // returns extra impact to add for the ball
+    virtual Vector2D collision(Ball const* ball) = 0;
 };
 
 #endif // COLLIDING_H

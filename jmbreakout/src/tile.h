@@ -4,21 +4,21 @@
 #define TILE_W 60
 #define TILE_H 10
 
-#include <vector>
+#include <QList>
 #include <QPainter>
 #include "bonus.h"
 #include "colliding.h"
 
-class Tile : public QGraphicsRectItem, public Collidable
+class Tile : public QGraphicsRectItem, public Colliding
 {
 public:
     Tile(int x, int y);
     int type() const;
     QRectF boundingRect() const;
     void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget *);
-    void collision(Ball* ball);
+    Vector2D collision(Ball const* ball);
 private:
-    std::vector<Bonus> bonuses;
+    QList<Bonus> bonuses;
     enum { Type = UserType +1 };
 };
 

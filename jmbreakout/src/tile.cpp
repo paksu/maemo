@@ -6,7 +6,7 @@ Tile::Tile(int x, int y)
     setRect(0,0,TILE_W,TILE_H);
 }
 
-void Tile::paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget *)
+void Tile::paint(QPainter * painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
 
     painter->drawRect(rect());
@@ -22,7 +22,7 @@ int Tile::type() const
     return Type;
 }
 
-void Tile::collision(Ball* ball)
+Vector2D Tile::collision(Ball const*)
 {
-
+    return Vector2D(.0, .0);
 }
