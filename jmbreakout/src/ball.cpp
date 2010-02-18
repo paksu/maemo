@@ -8,7 +8,7 @@
 Ball::Ball()
   : CollidingItem()
 {
-    setPos(QPointF(200, 180));
+    setPos(QPointF(220, 180));
     speed = Vector2D(1, 1);
     size = 20;
     setRect(-size/2,-size/2,size,size);
@@ -53,63 +53,21 @@ QRectF Ball::boundingRect() const
     return rect();
 }
 
-#include "collidingItem.h"
-
 void Ball::handleCollision() {
     QList <QGraphicsItem *> collision_list = scene()->collidingItems(this);
 
-    Vector2D collision_sums(0.0, 0.0);
+    Vector2D collision_sum(0.0, 0.0);
 
     for (QList<QGraphicsItem *>::ConstIterator it = collision_list.constBegin();
         it != collision_list.constEnd(); it++) {
 
-        Vector2D coll_normal = getCollisionNormal(*it);
-        qDebug() << speed.x << " " << speed.y << " | " << coll_normal.x << " : " << coll_normal.y;
-        if (coll_normal.x > 0.0)
-            speed.x = qAbs(speed.x);
-        if (coll_normal.x < 0.0)
-            speed.x = -qAbs(speed.x);
-
-        if (coll_normal.y > 0.0)
-            speed.y = qAbs(speed.y);
-        if (coll_normal.y < 0.0)
-            speed.y = -qAbs(speed.y);
-
-        CollidingItem* item = dynamic_cast<CollidingItem *>(*it);
-        collision_sums += item->collision(this);
+        CollidingItem* item = static_cast<CollidingItem *>(*it);
+        collision_sum += item->collision(this);
+        qDebug() << collision_sum.x << " ," << collision_sum.y;
     }
-}
-
-
-Vector2D Ball::getCollisionNormal(QGraphicsItem const* item) const
-{
-    const QRectF target_size = item->boundingRect();
-    const QPointF target_pos = item->pos();
-
-    qDebug() << pos() << " || " << " :: " << target_size << " : " << target_pos;
-
-    qreal dir_x = 0.0, dir_y = 0.0;
-    const qreal x1 = pos().x(), x2 = target_pos.x();
-    const qreal y1 = pos().y(), y2 = target_pos.y();
-    const qreal w = (target_size.width() + rect().width())/2;
-    const qreal h = (target_size.height() + rect().height())/2;
-
-    if ( w <= qAbs(x1 - x2) && h > qAbs(y1 - y2) ) {
-        qDebug() << 1;
-        // collision to side
-        dir_x = x1 < x2 ? -1.0 : 1.0;
-    }
-    else if ( h <= qAbs(y1 - y2) && w > qAbs(x1 - x2) ) {
-        qDebug() << 2;
-        // collision to top / bottom
-        dir_y = y1 < y2 ? -1.0 : 1.0;
-    }
-    else {
-        qDebug() << 3;
-        // collision to corner
-        dir_x = x1 < x2 ? -1.0 : 1.0;
-        dir_y = y1 < y2 ? -1.0 : 1.0;
-    }
-
-    return Vector2D(dir_x, dir_y);
+    collision_sum /= qreal(collision_list.size());
+    collision_sum *= 2;
+    qDebug() << collision_sum.x << " ," << collision_sum.y;
+    speed += collision_sum;
+    sleep(5);
 }

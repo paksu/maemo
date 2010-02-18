@@ -4,7 +4,7 @@
 Tile::Tile(int x, int y, int health, Breakout *b)
 {
     setPos(x * TILE_W, y * TILE_H);
-    setRect(0,0,TILE_W,TILE_H);
+    setRect(TILE_W/2, TILE_H/2,TILE_W,TILE_H);
     this->health = health;
     score = 100*health;
     parent = b;
@@ -25,10 +25,10 @@ int Tile::type() const
     return Type;
 }
 
-Vector2D Tile::collision(Ball const*)
+Vector2D Tile::collision(Ball const* ball)
 {
     health--;
-    return Vector2D(.0, .0);
+    return CollidingItem::collision(ball);
 }
 void Tile::advance(int step)
 {

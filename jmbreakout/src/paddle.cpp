@@ -43,7 +43,10 @@ bool Paddle::getDirection() {
 
 Vector2D Paddle::collision(Ball const* ball)
 {
-    qDebug() << "paddle collision";
     const qreal x1 = pos().x(), x2 = ball->pos().x();
-    return Vector2D((x1 - x2) / 5, 0.0);
+
+    qDebug() << "paddle collision";
+    Vector2D impulse = CollidingItem::collision(ball);
+    //impulse.x += (x1 - x2) / 5.0;
+    return impulse;
 }
