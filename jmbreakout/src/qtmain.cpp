@@ -15,8 +15,8 @@
      breakout.setSceneRect(0,0, Breakout::get_w(), Breakout::get_h());
      breakout.setItemIndexMethod(QGraphicsScene::NoIndex);
 
-     Ball ball;
-     breakout.addItem(&ball);
+     //Ball ball;
+     breakout.addItem((QGraphicsItem*) new Ball());
      for(int i = 0;i < 20;i++) {
          breakout.addItem(new Tile(i,1));
      }

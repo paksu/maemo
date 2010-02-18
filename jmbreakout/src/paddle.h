@@ -3,9 +3,10 @@
 
 #include <QGraphicsItem>
 #include <QPainter>
-#include "colliding.h"
+#include "collidingItem.h"
+#include "ball.h"
 
-class Paddle : public QGraphicsRectItem, public Colliding
+class Paddle : public CollidingItem
 {
 public:
     Paddle();

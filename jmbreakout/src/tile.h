@@ -7,9 +7,9 @@
 #include <QList>
 #include <QPainter>
 #include "bonus.h"
-#include "colliding.h"
+#include "collidingItem.h"
 
-class Tile : public QGraphicsRectItem, public Colliding
+class Tile : public CollidingItem
 {
 public:
     Tile(int x, int y);

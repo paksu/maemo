@@ -2,16 +2,15 @@
 #define BALL_H
 
 #include <QDebug>
-#include <QGraphicsEllipseItem>
 #include <QPainter>
 #include <QStyleOption>
 #include <QColor>
+#include <QGraphicsItem>
 
 #include "vector2d.h"
+#include "collidingItem.h"
 
-class CollidingGraphicsItem;
-
-class Ball : public QGraphicsEllipseItem
+class Ball : public CollidingItem
 {
     public:
         Ball();

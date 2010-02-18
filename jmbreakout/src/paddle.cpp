@@ -1,10 +1,12 @@
+#include <QDebug>
+
 #include "paddle.h"
 #include "breakout.h"
 
 #define HEIGHT 10
 
 Paddle::Paddle()
-        : speed(1.0), width(60.0)
+    : speed(1.0), width(60.0)
 {
     setRect(QRectF(-width/2, -HEIGHT/2, width, HEIGHT));
     setPos(QPointF(400, 400));

@@ -6,6 +6,7 @@
 #include <QList>
 
 Ball::Ball()
+  : CollidingItem()
 {
     setPos(QPointF(200, 180));
     speed = Vector2D(1, 1);
@@ -52,12 +53,12 @@ QRectF Ball::boundingRect() const
     return rect();
 }
 
-#include "colliding.h"
+#include "collidingItem.h"
 
 void Ball::handleCollision() {
     QList <QGraphicsItem *> collision_list = scene()->collidingItems(this);
 
-    Vector2D collision_sums();
+    Vector2D collision_sums(0.0, 0.0);
 
     for (QList<QGraphicsItem *>::ConstIterator it = collision_list.constBegin();
         it != collision_list.constEnd(); it++) {
@@ -74,8 +75,8 @@ void Ball::handleCollision() {
         if (coll_normal.y < 0.0)
             speed.y = -qAbs(speed.y);
 
-        Colliding* item = dynamic_cast<Colliding *>(*it);
-        speed += item->collision(this);
+        CollidingItem* item = dynamic_cast<CollidingItem *>(*it);
+        collision_sums += item->collision(this);
     }
 }
 
