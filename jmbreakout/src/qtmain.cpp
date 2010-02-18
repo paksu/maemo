@@ -18,8 +18,9 @@
      //Ball ball;
      breakout.addItem((QGraphicsItem*) new Ball());
      for(int i = 0;i < 20;i++) {
-         breakout.addItem(new Tile(i,1));
+         breakout.addItem(new Tile(i,1,1, &breakout));
      }
+
      breakout.addPaddle(new Paddle());
 
 
@@ -35,8 +36,6 @@
      // DONT DO IT
      //view.showFullScreen();
      view.show();
-
-
 
      QTimer timer;
      QObject::connect(&timer, SIGNAL(timeout()), &breakout, SLOT(advance()));

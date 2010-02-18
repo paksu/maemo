@@ -41,3 +41,12 @@ void Breakout::addPaddle(Paddle *newPaddle) {
 const Paddle & Breakout::getPaddle() {
     return *paddle;
 }
+
+void Breakout::addScore(int newScore) {
+    //score += newScore;
+    qDebug() << "Score is " << score;
+}
+
+int Breakout::getScore() {
+    return score;
+}

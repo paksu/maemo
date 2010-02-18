@@ -19,9 +19,13 @@ public:
     static int get_h();
     const Paddle & getPaddle();
     void addPaddle(Paddle *paddle);
+    int getScore();
+    void addScore(int score);
 private:
     static int acc_cache;
     Paddle *paddle;
+    int score;
+
 };
 
 #endif // BREAKOUT_H
