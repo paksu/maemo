@@ -15,5 +15,6 @@ public:
     virtual Vector2D collision(Ball const* ball);
 };
 
+#include "ball.h"
 
 #endif // COLLIDING_H
