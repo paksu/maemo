@@ -47,7 +47,7 @@ void Breakout::generateLevel(int seed) {
 
      for(int i = rows;i > 0;i--) {
          for(int j = 1;j < (width/60);j++) {
-            this->addItem(new Tile(j,i,5-i/2, this));
+            this->addItem(new Tile(j,i,6-i/2, this));
         }
      }
 

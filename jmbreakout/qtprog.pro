@@ -5,7 +5,8 @@ HEADERS += src/breakout.h \
     src/vector2d.h \
     src/tile.h \
     src/bonus.h \
-    src/collidingItem.h
+    src/collidingItem.h \
+    src/bonus.h
 SOURCES += src/qtmain.cpp \
     src/paddle.cpp \
     src/breakout.cpp \
@@ -13,7 +14,8 @@ SOURCES += src/qtmain.cpp \
     src/vector2d.cpp \
     src/tile.cpp \
     src/bonus.cpp \
-    src/collidingItem.cpp
+    src/collidingItem.cpp \
+    src/bonus.cpp
 FORMS += 
 
 # LEXS#
