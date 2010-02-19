@@ -6,6 +6,7 @@
 #include "vector2d.h"
 
 class Ball;
+class Bonus;
 
 class CollidingItem : public QGraphicsRectItem
 {
@@ -16,5 +17,6 @@ public:
 };
 
 #include "ball.h"
+#include "bonus.h"
 
 #endif // COLLIDING_H

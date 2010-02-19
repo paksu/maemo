@@ -14,7 +14,6 @@ class Tile : public CollidingItem
 {
 public:
     Tile(int x, int y, int health, Breakout *b);
-    int type() const;
     QRectF boundingRect() const;
     void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget *);
     Vector2D collision(Ball const* ball);
@@ -22,7 +21,7 @@ public:
 protected:
     void advance(int step);
 private:
-    QList<Bonus> bonuses;
+    QList<Bonus *> bonuses;
     int health;
     int score;
     Breakout *parent;

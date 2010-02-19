@@ -19,14 +19,11 @@ public:
     static int read_acc();
     static int get_w();
     static int get_h();
-    const Paddle & getPaddle();
-    void addPaddle(Paddle *paddle);
     int getScore();
     void addScore(int score);
     void generateLevel(int seed);
 private:
     static int acc_cache;
-    Paddle *paddle;
     int score;
     ButtonWidget* back;
 };

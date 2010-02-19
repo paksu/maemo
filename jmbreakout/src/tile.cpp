@@ -24,6 +24,7 @@ Tile::Tile(int x, int y, int health, Breakout *b)
         tileColors.append(QColor(60,50,0,255));
         tileColors.append(QColor(0,60,60,255));
     }
+    bonuses.append(new Bonus(pos()));
 }
 
 void Tile::paint(QPainter * painter, const QStyleOptionGraphicsItem *, QWidget *)
@@ -35,11 +36,6 @@ void Tile::paint(QPainter * painter, const QStyleOptionGraphicsItem *, QWidget *
 QRectF Tile::boundingRect() const
 {
     return rect();
-}
-
-int Tile::type() const
-{
-    return Type;
 }
 
 Vector2D Tile::collision(Ball const* ball)
@@ -54,6 +50,12 @@ void Tile::advance(int step)
     if(health <= 0){
         parent->addScore(score);
         scene()->removeItem(this);
+        if(bonuses.size()) {
+            for (QList<Bonus *>::ConstIterator it = bonuses.constBegin();
+                it != bonuses.constEnd(); it++) {
+                parent->addItem(static_cast<Bonus *>(*it));
+            }
+        }
         delete this;
     }
 }
