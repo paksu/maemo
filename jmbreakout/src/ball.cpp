@@ -69,5 +69,4 @@ void Ball::handleCollision() {
     collision_sum *= 2;
     qDebug() << collision_sum.x << " ," << collision_sum.y;
     speed += collision_sum;
-    sleep(5);
 }

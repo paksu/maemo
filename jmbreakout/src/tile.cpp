@@ -4,7 +4,7 @@
 Tile::Tile(int x, int y, int health, Breakout *b)
 {
     setPos(x * TILE_W, y * TILE_H);
-    setRect(TILE_W/2, TILE_H/2,TILE_W,TILE_H);
+    setRect(-TILE_W/2, -TILE_H/2,TILE_W,TILE_H);
     this->health = health;
     score = 100*health;
     parent = b;
