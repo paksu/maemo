@@ -1,3 +1,4 @@
 Makefile
 build/*
 qtprog.pro.user
+qrc_images.cpp
