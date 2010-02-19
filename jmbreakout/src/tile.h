@@ -18,6 +18,7 @@ public:
     QRectF boundingRect() const;
     void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget *);
     Vector2D collision(Ball const* ball);
+    static QList<QColor> tileColors;
 protected:
     void advance(int step);
 private:

@@ -14,11 +14,8 @@
      Breakout breakout;
      breakout.setSceneRect(0,0, Breakout::get_w(), Breakout::get_h());
      breakout.setItemIndexMethod(QGraphicsScene::NoIndex);
-
      breakout.addItem(new Ball());
-     for(int i = 0;i < 20;i++) {
-         breakout.addItem(new Tile(i,1,1, &breakout));
-     }
+     breakout.generateLevel(0);
 
      breakout.addItem(new Paddle());
 

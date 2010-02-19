@@ -1,17 +1,34 @@
 #include "tile.h"
 #include "breakout.h"
 
+QList<QColor> Tile::tileColors = QList<QColor>();
+
 Tile::Tile(int x, int y, int health, Breakout *b)
 {
     setPos(x * TILE_W, y * TILE_H);
     setRect(-TILE_W/2, -TILE_H/2,TILE_W,TILE_H);
     this->health = health;
-    score = 100*health;
+    score = health;
     parent = b;
+    if(tileColors.size() == 0) {
+        tileColors.append(QColor(255,210,0,255));
+        tileColors.append(QColor(255,90,0,255));
+        tileColors.append(QColor(50,200,0,255));
+        tileColors.append(QColor(75,0,200,255));
+        tileColors.append(QColor(60,50,0,255));
+        tileColors.append(QColor(0,60,60,255));
+        tileColors.append(QColor(255,210,0,255));
+        tileColors.append(QColor(255,90,0,255));
+        tileColors.append(QColor(50,200,0,255));
+        tileColors.append(QColor(75,0,200,255));
+        tileColors.append(QColor(60,50,0,255));
+        tileColors.append(QColor(0,60,60,255));
+    }
 }
 
 void Tile::paint(QPainter * painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
+    painter->setBrush(Tile::tileColors.at(score));
     painter->drawRect(rect());
 }
 

@@ -21,11 +21,11 @@ public:
     void addPaddle(Paddle *paddle);
     int getScore();
     void addScore(int score);
+    void generateLevel(int seed);
 private:
     static int acc_cache;
     Paddle *paddle;
     int score;
-
 };
 
 #endif // BREAKOUT_H
