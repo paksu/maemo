@@ -31,16 +31,6 @@ QRectF Paddle::boundingRect() const
     return rect();
 }
 
-double Paddle::getSpeed() {
-    return speed;
-}
-
-bool Paddle::getDirection() {
-    // maybe some day..
-    //return direction;
-    return true;
-}
-
 Vector2D Paddle::collision(Ball const* ball)
 {
     const qreal x1 = pos().x(), x2 = ball->pos().x();

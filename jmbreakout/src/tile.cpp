@@ -40,11 +40,3 @@ void Tile::advance(int step)
         delete this;
     }
 }
-void Tile::setParent(Breakout *b) {
-    qDebug() << parent;
-    parent = b;
-}
-Tile::~Tile() {
-    parent = NULL;
-    qDebug() << "GOOD BYE CRUEL WORLD";
-}

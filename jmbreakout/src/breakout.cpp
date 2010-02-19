@@ -8,6 +8,7 @@ int Breakout::acc_cache = 0;
 
 Breakout::Breakout()
 {
+    score = 0;
 }
 
 int Breakout::read_acc()
@@ -32,21 +33,10 @@ int Breakout::get_w() {
 int Breakout::get_h() {
     return AREA_H;
 }
-
-void Breakout::addPaddle(Paddle *newPaddle) {
-    paddle = newPaddle;
-    addItem((QGraphicsRectItem*) newPaddle);
-}
-
-const Paddle & Breakout::getPaddle() {
-    return *paddle;
-}
-
 void Breakout::addScore(int newScore) {
-    //score += newScore;
+    score += newScore;
     qDebug() << "Score is " << score;
 }
-
 int Breakout::getScore() {
     return score;
 }

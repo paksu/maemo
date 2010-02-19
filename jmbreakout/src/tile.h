@@ -14,17 +14,14 @@ class Tile : public CollidingItem
 {
 public:
     Tile(int x, int y, int health, Breakout *b);
-    ~Tile();
     int type() const;
     QRectF boundingRect() const;
     void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget *);
     Vector2D collision(Ball const* ball);
-    void setParent(Breakout *b);
 protected:
     void advance(int step);
 private:
     QList<Bonus> bonuses;
-    enum { Type = UserType +1 };
     int health;
     int score;
     Breakout *parent;

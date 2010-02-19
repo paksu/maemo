@@ -20,7 +20,7 @@
          breakout.addItem(new Tile(i,1,1, &breakout));
      }
 
-     breakout.addPaddle(new Paddle());
+     breakout.addItem(new Paddle());
 
 
      QGraphicsView view(&breakout);
