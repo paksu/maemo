@@ -11,19 +11,25 @@ Vector2D::Vector2D(qreal x, qreal y)
     : x(x), y(y)
 {}
 
-Vector2D Vector2D::operator += (const Vector2D& vec)
+Vector2D & Vector2D::operator += (const Vector2D& vec)
 {
     x += vec.x;
     y += vec.y;
     return *this;
 }
-Vector2D Vector2D::operator /= (const qreal& real)
+Vector2D & Vector2D::operator /= (const qreal& real)
 {
     x /= real;
     y /= real;
     return *this;
 }
-Vector2D Vector2D::operator *= (const qreal& real)
+Vector2D & Vector2D::operator *= (const Vector2D& vec)
+{
+    x *= vec.x;
+    y *= vec.y;
+    return *this;
+}
+Vector2D & Vector2D::operator *= (const qreal& real)
 {
     x *= real;
     y *= real;
