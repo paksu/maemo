@@ -6,12 +6,14 @@
 
 #include "vector2d.h"
 #include "paddle.h"
+#include "buttonwidget.h"
 
 #define AREA_W 800
 #define AREA_H 480
 
 class Breakout : public QGraphicsScene
 {
+Q_OBJECT
 public:
     Breakout();
     static int read_acc();
@@ -26,6 +28,7 @@ private:
     static int acc_cache;
     Paddle *paddle;
     int score;
+    ButtonWidget* back;
 };
 
 #endif // BREAKOUT_H

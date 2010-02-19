@@ -10,6 +10,9 @@ int Breakout::acc_cache = 0;
 Breakout::Breakout()
 {
     score = 0;
+    back = new ButtonWidget(AREA_W - 25, 25, QPixmap(":images/back.png"));
+    addItem(back);
+    connect(back, SIGNAL(clicked()), this, SLOT(deleteLater ()));
 }
 
 int Breakout::read_acc()
