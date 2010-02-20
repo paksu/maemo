@@ -24,3 +24,8 @@ void Bonus::advance(int step) {
         return;
     setPos(x(),y()+1);
 }
+
+Vector2D Bonus::collision(Ball const* ball)
+{
+    return Vector2D();
+}

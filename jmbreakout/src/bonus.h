@@ -14,6 +14,7 @@ public:
     Bonus(QPointF parentPos);
     QRectF boundingRect() const;
     void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget *);
+    Vector2D collision(Ball const* ball);
 protected:
     void advance(int step);
 private:

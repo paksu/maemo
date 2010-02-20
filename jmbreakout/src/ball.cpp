@@ -52,6 +52,8 @@ QRectF Ball::boundingRect() const
 {
     return rect();
 }
+#include <typeinfo>
+#include "buttonwidget.h"
 
 void Ball::handleCollision() {
     QList <QGraphicsItem *> collision_list = scene()->collidingItems(this);
@@ -61,9 +63,11 @@ void Ball::handleCollision() {
     for (QList<QGraphicsItem *>::ConstIterator it = collision_list.constBegin();
         it != collision_list.constEnd(); it++) {
 
-        CollidingItem* item = static_cast<CollidingItem *>(*it);
-        collision_sum += item->collision(this);
-        qDebug() << collision_sum.x << " ," << collision_sum.y;
+        if (typeid(**it) != typeid(ButtonWidget)) {
+            CollidingItem* item = static_cast<CollidingItem *>(*it);
+            collision_sum += item->collision(this);
+            qDebug() << collision_sum.x << " ," << collision_sum.y;
+        }
     }
     collision_sum /= qreal(collision_list.size());
     collision_sum.x = -qAbs(collision_sum.x);
