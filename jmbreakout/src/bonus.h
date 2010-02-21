@@ -12,12 +12,16 @@ class Bonus : public CollidingItem
 {
 public:
     Bonus(QPointF parentPos);
+    ~Bonus();
     QRectF boundingRect() const;
     void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget *);
     Vector2D collision(Ball const* ball);
+    enum bonusTypes { PADDLE, SCORE, BALL };
+    int bonusType;
 protected:
     void advance(int step);
 private:
+
 };
 
 #endif // BONUS_H

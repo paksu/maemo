@@ -26,6 +26,7 @@ private:
     static int acc_cache;
     int score;
     ButtonWidget* back;
+    QGraphicsSimpleTextItem* scoreText;
 };
 
 #endif // BREAKOUT_H

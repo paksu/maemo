@@ -13,7 +13,14 @@ Ball::Ball()
     size = 20;
     setRect(-size/2,-size/2,size,size);
 }
-
+Ball::Ball(int x, int y)
+  : CollidingItem()
+{
+    setPos(QPointF(x, y));
+    speed = Vector2D(1, 3);
+    size = 20;
+    setRect(-size/2,-size/2,size,size);
+}
 void Ball::advance(int step)
 {
     if(!step) {
@@ -63,7 +70,7 @@ void Ball::handleCollision() {
     for (QList<QGraphicsItem *>::ConstIterator it = collision_list.constBegin();
         it != collision_list.constEnd(); it++) {
 
-        if (typeid(**it) != typeid(ButtonWidget)) {
+        if (typeid(**it) != typeid(ButtonWidget) && typeid(**it) != typeid(QGraphicsSimpleTextItem) ) {
             CollidingItem* item = static_cast<CollidingItem *>(*it);
             collision_sum += item->collision(this);
             qDebug() << collision_sum.x << " ," << collision_sum.y;

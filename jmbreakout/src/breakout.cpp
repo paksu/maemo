@@ -11,6 +11,10 @@ Breakout::Breakout()
 {
     score = 0;
     back = new ButtonWidget(AREA_W - 25, 25, QPixmap(":images/back.png"));
+    scoreText = addSimpleText(QString("0"),QFont("System", 16, QFont::Bold));
+    scoreText->setPos(0,450);
+    scoreText->setBrush(QBrush(QColor(255,255,255,150)));
+    scoreText->setVisible(true);
     addItem(back);
     connect(back, SIGNAL(clicked()), this, SLOT(deleteLater ()));
 }
@@ -39,6 +43,7 @@ int Breakout::get_h() {
 }
 void Breakout::addScore(int newScore) {
     score += newScore;
+    scoreText->setText(QString().number(score));
     qDebug() << "Score is " << score;
 }
 int Breakout::getScore() {

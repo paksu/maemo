@@ -14,6 +14,7 @@ class Ball : public CollidingItem
 {
     public:
         Ball();
+        Ball(int x, int y);
         Vector2D speed;
         double size;
         void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget);

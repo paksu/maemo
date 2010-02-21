@@ -24,7 +24,9 @@ Tile::Tile(int x, int y, int health, Breakout *b)
         tileColors.append(QColor(60,50,0,255));
         tileColors.append(QColor(0,60,60,255));
     }
-    bonuses.append(new Bonus(pos()));
+    qDebug() << rand() % 5;
+    if(!(rand() % 5))
+        bonuses.append(new Bonus(pos()));
 }
 
 void Tile::paint(QPainter * painter, const QStyleOptionGraphicsItem *, QWidget *)
@@ -48,7 +50,7 @@ void Tile::advance(int step)
     if(!step)
         return;
     if(health <= 0){
-        parent->addScore(score);
+        parent->addScore(score * 1000);
         scene()->removeItem(this);
         if(bonuses.size()) {
             for (QList<Bonus *>::ConstIterator it = bonuses.constBegin();

@@ -4,5 +4,7 @@
         <file>images/ball.png</file>
         <file>images/paddle.png</file>
         <file>images/back.png</file>
+        <file>images/bonus.png</file>
+        <file>images/big_paddle.png</file>
     </qresource>
 </RCC>

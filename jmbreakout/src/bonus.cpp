@@ -5,6 +5,8 @@ Bonus::Bonus(QPointF parentPos)
 {
     setPos(parentPos);
     setRect(-BONUS_W/2, -BONUS_H/2, BONUS_W, BONUS_H);
+    // rand this
+    bonusType = Bonus::PADDLE;
 }
 QRectF Bonus::boundingRect() const
 {
@@ -28,4 +30,7 @@ void Bonus::advance(int step) {
 Vector2D Bonus::collision(Ball const* ball)
 {
     return Vector2D();
+}
+Bonus::~Bonus() {
+    qDebug() << "GOODBYE CRUEL WORLD" << this;
 }
