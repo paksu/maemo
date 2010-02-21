@@ -14,11 +14,10 @@
      breakout.setSceneRect(0,0, Breakout::get_w(), Breakout::get_h());
      breakout.setItemIndexMethod(QGraphicsScene::NoIndex);
      breakout.addItem(new Ball(100,200));
-     breakout.addItem(new Ball(200,100));
+     //breakout.addItem(new Ball(200,100));
      breakout.generateLevel(0);
 
-     breakout.addItem(new Paddle());
-
+     breakout.addItem(new Paddle(&breakout));
 
      QGraphicsView view(&breakout);
      view.setBackgroundBrush(QPixmap(":/images/bg.png"));

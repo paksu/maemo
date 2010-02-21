@@ -3,7 +3,8 @@
 
 #define BONUS_W 25
 #define BONUS_H 10
-#define NUM_BONUS_TYPES 2
+#define NUM_BONUS_TYPES 3
+
 #include <QGraphicsRectItem>
 #include "vector2d.h"
 #include "ball.h"
