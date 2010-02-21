@@ -44,7 +44,7 @@
    </widget>
    <widget class="GameView" name="gameView">
     <property name="enabled">
-     <bool>false</bool>
+     <bool>true</bool>
     </property>
     <property name="geometry">
      <rect>

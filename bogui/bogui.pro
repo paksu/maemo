@@ -14,7 +14,8 @@ SOURCES += main.cpp \
     bonus.cpp \
     ball.cpp \
     buttonwidget.cpp \
-    breakoutlevelgenerator.cpp
+    breakoutlevelgenerator.cpp \
+    util.cpp
 HEADERS += mainwindow.h \
     gameview.h \
     breakout.h \
@@ -25,6 +26,7 @@ HEADERS += mainwindow.h \
     bonus.h \
     ball.h \
     buttonwidget.h \
-    breakoutlevelgenerator.h
+    breakoutlevelgenerator.h \
+    util.h
 FORMS += mainwindow.ui
 RESOURCES += images.qrc

@@ -3,6 +3,9 @@
 
 #include <QDebug>
 
+qreal Breakout::mousePos = 0;
+
+
 Breakout::Breakout()
 {
     tick_timer = new QTimer();
@@ -37,7 +40,7 @@ void Breakout::init()
 
 void Breakout::addPaddle()
 {
-    Paddle* p = new Paddle();
+    Paddle* p = new Paddle(this);
     paddles_ += p;
     addItem(p);
 }
@@ -78,10 +81,17 @@ void Breakout::addScore(int newScore) {
     qDebug() << 100 /  1 + bonusTime.secsTo(QTime::currentTime());
     score += newScore;
     score += newScore * (10 / 1 + bonusTime.secsTo(QTime::currentTime()));
-    scoreText->setText(QString().number(score));
+    // BUGAA ( valgrind )
+    // scoreText->setText(QString().number(score));
     qDebug() << "Score is " << score;
 }
 
 int Breakout::getScore() {
     return score;
+}
+
+// mouse
+void Breakout::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent)
+{
+   Breakout::mousePos = mouseEvent->scenePos().x();
 }

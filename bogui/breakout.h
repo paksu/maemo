@@ -4,6 +4,7 @@
 #include <QGraphicsScene>
 #include <QPainter>
 #include <QGraphicsSimpleTextItem>
+#include <QGraphicsSceneMouseEvent>
 #include <QTimer>
 #include <QTime>
 #include <QSet>
@@ -33,6 +34,9 @@ public:
     static qreal read_acc();
     int getScore();
     void addScore(int score);
+
+    static qreal mousePos;
+
 private:
     QTimer* tick_timer;
     QSet<Ball*> balls_;
@@ -48,6 +52,9 @@ private:
     ButtonWidget* back;
     QGraphicsSimpleTextItem* scoreText;
     QTime bonusTime;
+
+protected:
+    void mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent);
 };
 
 #endif // BREAKOUT_H
