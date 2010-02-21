@@ -15,14 +15,13 @@ public:
     void paint(QPainter * painter, const QStyleOptionGraphicsItem *, QWidget * = 0);
     Vector2D collision(Ball const* ball);
     QRectF boundingRect() const;
-
 protected:
     void advance(int phase);
 private:
     double speed;
     paddleSize width;
-    int bonusWidth;
     int timer;
+    int bonusWidth;
     void handleCollision();
 };
 

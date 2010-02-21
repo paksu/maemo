@@ -10,11 +10,11 @@
  {
      QApplication app(argc, argv);
      qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));
-
      Breakout breakout;
      breakout.setSceneRect(0,0, Breakout::get_w(), Breakout::get_h());
      breakout.setItemIndexMethod(QGraphicsScene::NoIndex);
-     breakout.addItem(new Ball());
+     breakout.addItem(new Ball(100,200));
+     breakout.addItem(new Ball(200,100));
      breakout.generateLevel(0);
 
      breakout.addItem(new Paddle());
@@ -35,7 +35,7 @@
 
      QTimer timer;
      QObject::connect(&timer, SIGNAL(timeout()), &breakout, SLOT(advance()));
-     timer.start(100 / 25);
+     timer.start(4);
 
      return app.exec();
  }

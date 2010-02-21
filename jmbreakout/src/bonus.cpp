@@ -6,7 +6,7 @@ Bonus::Bonus(QPointF parentPos)
     setPos(parentPos);
     setRect(-BONUS_W/2, -BONUS_H/2, BONUS_W, BONUS_H);
     // rand this
-    bonusType = Bonus::PADDLE;
+    bonusType = rand() % NUM_BONUS_TYPES;
 }
 QRectF Bonus::boundingRect() const
 {
@@ -14,16 +14,19 @@ QRectF Bonus::boundingRect() const
 }
 void Bonus::paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget *)
 {
-     //qDebug() << "x" << pos.x << "y" << pos.y;
     painter->drawPixmap(-BONUS_W/2,-BONUS_H/2,QPixmap(":/images/bonus.png"));
-
-    //hitbox
     painter->drawRect(rect());
 }
 
 void Bonus::advance(int step) {
     if(!step)
+    {
+        if(y() > 500)
+        {
+            delete this;
+        }
         return;
+    }
     setPos(x(),y()+1);
 }
 
@@ -31,6 +34,7 @@ Vector2D Bonus::collision(Ball const* ball)
 {
     return Vector2D();
 }
-Bonus::~Bonus() {
-    qDebug() << "GOODBYE CRUEL WORLD" << this;
+Bonus::~Bonus()
+{
+    qDebug() << "DEAD BONUS. TYPE : " << bonusType;
 }

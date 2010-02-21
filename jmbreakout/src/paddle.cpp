@@ -48,8 +48,6 @@ QRectF Paddle::boundingRect() const
 
 Vector2D Paddle::collision(Ball const* ball)
 {
-    const qreal x1 = pos().x(), x2 = ball->pos().x();
-
     qDebug() << "paddle collision";
     Vector2D impulse = CollidingItem::collision(ball);
     //impulse.x += (x1 - x2) / 5.0;
@@ -61,8 +59,9 @@ void Paddle::handleCollision() {
     for (QList<QGraphicsItem *>::ConstIterator it = collision_list.constBegin();
         it != collision_list.constEnd(); it++) {
         if (typeid(**it) == typeid(Bonus)) {
-            // TODO: handle different bonus types
-            qDebug() << *it;
+            Bonus * b = static_cast<Bonus *>(*it);
+            qDebug() << b->bonusType;
+
             bonusWidth = LARGE;
             setRect(QRectF(-bonusWidth/2, -HEIGHT/2, bonusWidth, HEIGHT));
             timer = 500;

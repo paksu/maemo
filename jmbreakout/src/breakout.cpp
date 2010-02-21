@@ -16,6 +16,7 @@ Breakout::Breakout()
     scoreText->setBrush(QBrush(QColor(255,255,255,150)));
     scoreText->setVisible(true);
     addItem(back);
+    bonusTime = QTime::currentTime();
     connect(back, SIGNAL(clicked()), this, SLOT(deleteLater ()));
 }
 
@@ -42,7 +43,9 @@ int Breakout::get_h() {
     return AREA_H;
 }
 void Breakout::addScore(int newScore) {
+    qDebug() << 100 /  1 + bonusTime.secsTo(QTime::currentTime());
     score += newScore;
+    score += newScore * (10 / 1 + bonusTime.secsTo(QTime::currentTime()));
     scoreText->setText(QString().number(score));
     qDebug() << "Score is " << score;
 }

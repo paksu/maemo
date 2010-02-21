@@ -85,7 +85,7 @@ void Ball::handleCollision() {
         speed.y *= collision_sum.y;
 
     //collision_sum *= 2;
-    qDebug() << collision_sum.x << " ," << collision_sum.y;
+    //qDebug() << collision_sum.x << " ," << collision_sum.y;
     /*
     if (collision_sum.x < -0.1)
         speed.x = -qAbs(speed.x);

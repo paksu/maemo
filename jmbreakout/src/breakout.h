@@ -3,6 +3,7 @@
 
 #include <QGraphicsScene>
 #include <QPainter>
+#include <QTime>
 
 #include "vector2d.h"
 #include "paddle.h"
@@ -27,6 +28,7 @@ private:
     int score;
     ButtonWidget* back;
     QGraphicsSimpleTextItem* scoreText;
+    QTime bonusTime;
 };
 
 #endif // BREAKOUT_H
