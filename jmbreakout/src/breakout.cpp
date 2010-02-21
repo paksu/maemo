@@ -8,6 +8,7 @@
 int Breakout::acc_cache = 0;
 qreal Breakout::acc_expfilter_delta = 0.2;
 qreal Breakout::acc_last = 0.0;
+qreal Breakout::mousePos = 0;
 
 Breakout::Breakout()
 {
@@ -66,4 +67,9 @@ void Breakout::generateLevel(int seed) {
         }
      }
 
+}
+// mouse
+void Breakout::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent)
+{
+   Breakout::mousePos = mouseEvent->scenePos().x();
 }

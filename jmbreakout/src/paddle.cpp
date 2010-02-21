@@ -1,15 +1,15 @@
 #include <QDebug>
 
 #include "paddle.h"
-#include "breakout.h"
-
 #define HEIGHT 10
-Paddle::Paddle()
+
+Paddle::Paddle(Breakout* b)
     : speed(1.0), width(Paddle::NORMAL), bonusWidth(0), timer(0)
 {
 
     setRect(QRectF(-width/2, -HEIGHT/2, width, HEIGHT));
     setPos(QPointF(400, 400));
+    parent = b;
 }
 
 void Paddle::advance(int phase)
@@ -18,7 +18,8 @@ void Paddle::advance(int phase)
         if(!scene()->collidingItems(this).isEmpty()) {
             handleCollision();
         }
-        setPos(QPointF(Breakout::read_acc() + 400.0, 400.0));
+        setPos(QPointF(Breakout::mousePos, 400.0));
+        //setPos(QPointF(Breakout::read_acc() + 400.0, 400.0));
         return;
     }
     //setPos(QPointF(400, 400));
@@ -60,11 +61,22 @@ void Paddle::handleCollision() {
         it != collision_list.constEnd(); it++) {
         if (typeid(**it) == typeid(Bonus)) {
             Bonus * b = static_cast<Bonus *>(*it);
-            qDebug() << b->bonusType;
+            switch(b->bonusType)
+            {
+                case Bonus::PADDLE:
+                    bonusWidth = LARGE;
+                    setRect(QRectF(-bonusWidth/2, -HEIGHT/2, bonusWidth, HEIGHT));
+                    timer = 500;
+                break;
 
-            bonusWidth = LARGE;
-            setRect(QRectF(-bonusWidth/2, -HEIGHT/2, bonusWidth, HEIGHT));
-            timer = 500;
+                case Bonus::SCORE:
+                    parent->addScore(10000);
+                break;
+
+                case Bonus::BALL:
+                    parent->addItem(new Ball(x(),y()-20));
+                break;
+            }
             delete (*it);
         }
     }

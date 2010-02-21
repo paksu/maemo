@@ -6,7 +6,9 @@ Bonus::Bonus(QPointF parentPos)
     setPos(parentPos);
     setRect(-BONUS_W/2, -BONUS_H/2, BONUS_W, BONUS_H);
     // rand this
+    //bonusType = Bonus::BALL;
     bonusType = rand() % NUM_BONUS_TYPES;
+    qDebug() << bonusType;
 }
 QRectF Bonus::boundingRect() const
 {

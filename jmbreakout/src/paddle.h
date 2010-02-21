@@ -3,15 +3,17 @@
 
 #include <QGraphicsItem>
 #include <QPainter>
+#include <typeinfo>
+
 #include "collidingItem.h"
 #include "ball.h"
-#include <typeinfo>
+#include "breakout.h"
 
 class Paddle : public CollidingItem
 {
 public:
+    Paddle(Breakout* b);
     enum paddleSize { TINY = 20, NORMAL = 60, LARGE = 120 };
-    Paddle();
     void paint(QPainter * painter, const QStyleOptionGraphicsItem *, QWidget * = 0);
     Vector2D collision(Ball const* ball);
     QRectF boundingRect() const;
@@ -20,8 +22,9 @@ protected:
 private:
     double speed;
     paddleSize width;
-    int timer;
     int bonusWidth;
+    int timer;
+    Breakout* parent;
     void handleCollision();
 };
 

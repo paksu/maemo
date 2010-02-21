@@ -1,15 +1,17 @@
 #include "ball.h"
 #include "breakout.h"
 #include "paddle.h"
-
+#include "buttonwidget.h"
 
 #include <QList>
+#include <typeinfo>
+
 
 Ball::Ball()
   : CollidingItem()
 {
     setPos(QPointF(220, 180));
-    speed = Vector2D(1, 3);
+    speed = Vector2D(1, 1);
     size = 20;
     setRect(-size/2,-size/2,size,size);
 }
@@ -17,7 +19,7 @@ Ball::Ball(int x, int y)
   : CollidingItem()
 {
     setPos(QPointF(x, y));
-    speed = Vector2D(1, 3);
+    speed = Vector2D(1, 1);
     size = 20;
     setRect(-size/2,-size/2,size,size);
 }
@@ -59,9 +61,6 @@ QRectF Ball::boundingRect() const
 {
     return rect();
 }
-#include <typeinfo>
-#include "buttonwidget.h"
-
 void Ball::handleCollision() {
     QList <QGraphicsItem *> collision_list = scene()->collidingItems(this);
 
