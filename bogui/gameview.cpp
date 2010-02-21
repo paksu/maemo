@@ -5,6 +5,7 @@ GameView::GameView(QWidget* parent)
 {
     hide();
     breakout = new Breakout();
+    setSceneRect(-width()/4, -height()/4, width(), height());
     setScene(breakout);
 
     setBackgroundBrush(QPixmap(":/images/bg.png"));
@@ -18,11 +19,8 @@ GameView::~GameView()
     delete breakout;
 }
 
-#include <QDebug>
-
 void GameView::startGame()
 {
     show();
     breakout->start();
-    qDebug() << "start!!";
 }

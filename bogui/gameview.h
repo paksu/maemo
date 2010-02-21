@@ -9,15 +9,19 @@
 
 class GameView : public QGraphicsView
 {
+    Q_OBJECT
+
 public:
     GameView(QWidget* parent = 0);
     ~GameView();
 
-private:
-    Breakout* breakout;
 
 public slots:
     void startGame();
+
+
+private:
+    Breakout* breakout;
 
 };
 
