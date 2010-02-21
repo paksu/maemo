@@ -3,6 +3,7 @@
 
 #include <QGraphicsScene>
 #include <QPainter>
+#include <QList>
 
 #include "vector2d.h"
 #include "paddle.h"
@@ -16,7 +17,7 @@ class Breakout : public QGraphicsScene
 Q_OBJECT
 public:
     Breakout();
-    static int read_acc();
+    static qreal read_acc();
     static int get_w();
     static int get_h();
     int getScore();
@@ -24,6 +25,8 @@ public:
     void generateLevel(int seed);
 private:
     static int acc_cache;
+    static qreal acc_expfilter_delta;
+    static qreal acc_last;
     int score;
     ButtonWidget* back;
     QGraphicsSimpleTextItem* scoreText;

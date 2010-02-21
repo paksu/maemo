@@ -5,7 +5,7 @@
 
 #define HEIGHT 10
 Paddle::Paddle()
-    : speed(1.0), width(Paddle::NORMAL), timer(0), bonusWidth(0)
+    : speed(1.0), width(Paddle::NORMAL), bonusWidth(0), timer(0)
 {
 
     setRect(QRectF(-width/2, -HEIGHT/2, width, HEIGHT));
@@ -18,7 +18,7 @@ void Paddle::advance(int phase)
         if(!scene()->collidingItems(this).isEmpty()) {
             handleCollision();
         }
-        setPos(QPointF(Breakout::read_acc() + 400, 400));
+        setPos(QPointF(Breakout::read_acc() + 400.0, 400.0));
         return;
     }
     //setPos(QPointF(400, 400));

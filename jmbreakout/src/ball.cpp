@@ -73,7 +73,6 @@ void Ball::handleCollision() {
         if (typeid(**it) != typeid(ButtonWidget) && typeid(**it) != typeid(QGraphicsSimpleTextItem) ) {
             CollidingItem* item = static_cast<CollidingItem *>(*it);
             collision_sum += item->collision(this);
-            qDebug() << collision_sum.x << " ," << collision_sum.y;
         }
     }
     collision_sum /= qreal(collision_list.size());
@@ -83,18 +82,4 @@ void Ball::handleCollision() {
         speed.x *= collision_sum.x;
     if (collision_sum.y < -0.1)
         speed.y *= collision_sum.y;
-
-    //collision_sum *= 2;
-    qDebug() << collision_sum.x << " ," << collision_sum.y;
-    /*
-    if (collision_sum.x < -0.1)
-        speed.x = -qAbs(speed.x);
-    if (collision_sum.x > 0.1)
-        speed.x = qAbs(speed.x);
-
-    if (collision_sum.y < -0.1)
-        speed.y = -qAbs(speed.y);
-    if (collision_sum.y > 0.1)
-        speed.y = qAbs(speed.y);*/
-    //speed *= collision_sum;
 }

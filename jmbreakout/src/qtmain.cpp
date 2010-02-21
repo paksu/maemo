@@ -35,7 +35,7 @@
 
      QTimer timer;
      QObject::connect(&timer, SIGNAL(timeout()), &breakout, SLOT(advance()));
-     timer.start(100 / 25);
+     timer.start(100.0/25.0);
 
      return app.exec();
  }

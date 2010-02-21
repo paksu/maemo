@@ -20,7 +20,7 @@ void ButtonWidget::paint(QPainter * painter, const QStyleOptionGraphicsItem *, Q
     painter->drawPixmap(0, 0, pmap);
 }
 
-void ButtonWidget::mousePressEvent(QGraphicsSceneMouseEvent * event )
+void ButtonWidget::mousePressEvent(QGraphicsSceneMouseEvent *)
 {
     emit clicked();
 }

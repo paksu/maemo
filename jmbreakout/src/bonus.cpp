@@ -12,7 +12,7 @@ QRectF Bonus::boundingRect() const
 {
     return rect();
 }
-void Bonus::paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget *)
+void Bonus::paint(QPainter * painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
      //qDebug() << "x" << pos.x << "y" << pos.y;
     painter->drawPixmap(-BONUS_W/2,-BONUS_H/2,QPixmap(":/images/bonus.png"));
@@ -27,7 +27,7 @@ void Bonus::advance(int step) {
     setPos(x(),y()+1);
 }
 
-Vector2D Bonus::collision(Ball const* ball)
+Vector2D Bonus::collision(Ball const*)
 {
     return Vector2D();
 }
