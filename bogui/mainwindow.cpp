@@ -11,3 +11,8 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+void MainWindow::on_randomizeButton_clicked()
+{
+   ui->seed->setValue(rand()%15);
+}
