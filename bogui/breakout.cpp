@@ -46,13 +46,15 @@ void Breakout::start()
 void Breakout::init()
 {
     bonusTime = QTime::currentTime();
-    // deletePaddles();
-    // deleteBalls();
-    // deleteTiles();
+    deletePaddles();
+    deleteBalls();
+    deleteTiles();
     addPaddle();
     addBall();
     generateLevel(0);
 }
+
+
 
 void Breakout::addPaddle()
 {
@@ -99,6 +101,37 @@ void Breakout::generateLevel(const int & seed) {
             this->addItem(t);
        }
     }
+}
+
+void Breakout::deletePaddles()
+{
+    QList<Paddle*> list = paddles_.values();
+    QList<Paddle*>::iterator it;
+    for (it = list.begin(); it != list.end(); it++) {
+        removeItem(*it);
+        delete *it;
+    }
+    paddles_.clear();
+}
+void Breakout::deleteBalls()
+{
+    QList<Ball*> list = balls_.values();
+    QList<Ball*>::iterator it;
+    for (it = list.begin(); it != list.end(); it++) {
+        removeItem(*it);
+        delete *it;
+    }
+    balls_.clear();
+}
+void Breakout::deleteTiles()
+{
+    QList<Tile*> list = tiles_.values();
+    QList<Tile*>::iterator it;
+    for (it = list.begin(); it != list.end(); it++) {
+        removeItem(*it);
+        delete *it;
+    }
+    tiles_.clear();
 }
 
 void Breakout::addScore(int newScore) {

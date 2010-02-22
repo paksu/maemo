@@ -22,6 +22,7 @@ GameView::~GameView()
 void GameView::startGame()
 {
     show();
+    breakout->init();
     breakout->start();
 }
 

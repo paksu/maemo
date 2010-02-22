@@ -32,6 +32,9 @@ public:
     void addBall();
     void addBonus(Bonus *);
     void generateLevel(const int & seed);
+    void deletePaddles();
+    void deleteBalls();
+    void deleteTiles();
     const QSet<Tile*>  & tiles();
     const QSet<Paddle*> & paddles();
     const QSet<Bonus*> & bonuses();
