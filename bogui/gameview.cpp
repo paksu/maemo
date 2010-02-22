@@ -13,6 +13,7 @@ GameView::GameView(QWidget* parent)
     setCacheMode(QGraphicsView::CacheBackground);
     setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
 qDebug() << width() << " ----- " << height();
+
 }
 
 GameView::~GameView()

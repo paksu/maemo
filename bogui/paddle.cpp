@@ -57,29 +57,24 @@ Vector2D Paddle::collision(Ball const* ball)
     return impulse;
 }
 void Paddle::handleCollision() {
+    Breakout *bo = static_cast<Breakout*>(scene());
     QList <QGraphicsItem *> collision_list = scene()->collidingItems(this);
 
     for (QList<QGraphicsItem *>::ConstIterator it = collision_list.constBegin();
-        it != collision_list.constEnd(); it++) {
-        if (typeid(**it) == typeid(Bonus)) {
-            Bonus * b = static_cast<Bonus *>(*it);
-            switch(b->bonusType)
-            {
-                case Bonus::PADDLE:
-                    bonusWidth = LARGE;
-                    setRect(QRectF(-bonusWidth/2, -HEIGHT/2, bonusWidth, HEIGHT));
-                    timer = 500;
-                break;
-
-                case Bonus::SCORE:
-                    parent->addScore(10000);
-                break;
-
-                case Bonus::BALL:
-                    parent->addItem(new Ball(x(),y()-20));
-                break;
-            }
-            delete (*it);
+    it != collision_list.constEnd(); it++) {
+    Bonus* bonus = static_cast<const Bonus*>(*it);
+        if (bo->bonuses().contains(bonus))
+        {
+            bonus->giveBonus(bo);
+            parent->removeItem(*it);
         }
-    }
+     }
+}
+void Paddle::setBonusWidth(int _bonusWidth)
+{
+    bonusWidth = _bonusWidth;
+}
+void Paddle::setTimer(int _timer)
+{
+    timer = _timer;
 }

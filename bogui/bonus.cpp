@@ -24,8 +24,10 @@ void Bonus::paint(QPainter * painter, const QStyleOptionGraphicsItem *, QWidget 
 void Bonus::advance(int step) {
     if(!step)
     {
-        if(y() > 500)
+        qDebug() << "Y: " <<  y();
+        if(y() > 600)
         {
+            qDebug() << "DEAD BONUS. TYPE : " << this;
             delete this;
         }
         return;
@@ -40,5 +42,7 @@ Vector2D Bonus::collision(Ball const*)
 
 Bonus::~Bonus()
 {
+
     qDebug() << "DEAD BONUS. TYPE : " << bonusType;
+
 }

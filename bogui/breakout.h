@@ -13,7 +13,6 @@
 #include "buttonwidget.h"
 
 #include "ball.h"
-#include "tile.h"
 #include "paddle.h"
 #include "bonus.h"
 
@@ -27,9 +26,11 @@ public:
     void start();
     void addPaddle();
     void addBall();
+    void addBonus(Bonus *);
     void generateLevel(const int & seed);
     const QSet<Tile*>  & tiles();
     const QSet<Paddle*> & paddles();
+    const QSet<Bonus*> & bonuses();
 
     static qreal read_acc();
     int getScore();

@@ -8,6 +8,10 @@
 #include "vector2d.h"
 #include "ball.h"
 
+class Breakout;
+class Paddle;
+class Tile;
+
 class Bonus : public CollidingItem
 {
 public:
@@ -18,11 +22,13 @@ public:
     Vector2D collision(Ball const* ball);
     enum bonusTypes { PADDLE, SCORE, BALL };
     int bonusType;
+    virtual void giveBonus(Breakout *bo) = 0;
 protected:
     void advance(int step);
 private:
 
 };
 
+#include "breakout.h"
 
 #endif // BONUS_H

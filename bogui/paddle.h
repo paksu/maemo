@@ -18,7 +18,8 @@ public:
     void paint(QPainter * painter, const QStyleOptionGraphicsItem *, QWidget * = 0);
     Vector2D collision(Ball const* ball);
     QRectF boundingRect() const;
-
+    void setBonusWidth(int bonusWidth);
+    void setTimer(int timer);
 protected:
     void advance(int phase);
 

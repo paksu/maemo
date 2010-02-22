@@ -15,6 +15,7 @@ class Tile : public CollidingItem
 {
 public:
     Tile(int x, int y, int health, Breakout *b);
+    ~Tile();
     QRectF boundingRect() const;
     void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget *);
     Vector2D collision(Ball const* ball);

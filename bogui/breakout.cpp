@@ -11,6 +11,7 @@ Breakout::Breakout()
     tick_timer = new QTimer();
     tick_timer->setInterval(100 / 25);
     QObject::connect(tick_timer, SIGNAL(timeout()), this, SLOT(advance()));
+    init();
 }
 
 Breakout::~Breakout()
@@ -25,6 +26,7 @@ void Breakout::start()
     addBall();
     generateLevel(0);
     tick_timer->start();
+
 }
 
 void Breakout::init()
@@ -33,6 +35,7 @@ void Breakout::init()
     scoreText->setPos(0,450);
     scoreText->setBrush(QBrush(QColor(255,255,255,150)));
     scoreText->setVisible(true);
+    score = 0;
     bonusTime = QTime::currentTime();
 }
 
@@ -49,7 +52,11 @@ void Breakout::addBall()
     balls_ += b;
     addItem(b);
 }
-
+void Breakout::addBonus(Bonus *b)
+{
+    bonuses_ += b;
+    addItem(b);
+}
 const QSet<Tile*> & Breakout::tiles()
 {
     return tiles_;
@@ -58,6 +65,10 @@ const QSet<Tile*> & Breakout::tiles()
 const QSet<Paddle*> & Breakout::paddles()
 {
     return paddles_;
+}
+const QSet<Bonus *> & Breakout::bonuses()
+{
+    return bonuses_;
 }
 
 
@@ -80,7 +91,8 @@ void Breakout::addScore(int newScore) {
     score += newScore;
     score += newScore * (10 / 1 + bonusTime.secsTo(QTime::currentTime()));
     // BUGAA ( valgrind )
-    // scoreText->setText(QString().number(score));
+
+    scoreText->setText(QString().number(500));
     qDebug() << "Score is " << score;
 }
 

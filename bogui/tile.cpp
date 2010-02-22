@@ -1,4 +1,5 @@
 #include "tile.h"
+#include "ballbonus.h"
 
 QList<QColor> Tile::tileColors = QList<QColor>();
 
@@ -23,8 +24,8 @@ Tile::Tile(int x, int y, int health, Breakout *b)
         tileColors.append(QColor(60,50,0,255));
         tileColors.append(QColor(0,60,60,255));
     }
-    if(!(rand() % 5))   // 20% chance for a bonus
-        bonuses.append(new Bonus(pos()));
+    //if(!(rand() % 5))   // 20% chance for a bonus
+    bonuses.append(new BallBonus(pos()));
 }
 
 void Tile::paint(QPainter * painter, const QStyleOptionGraphicsItem *, QWidget *)
@@ -53,9 +54,18 @@ void Tile::advance(int step)
         if(bonuses.size()) {
             for (QList<Bonus *>::ConstIterator it = bonuses.constBegin();
                 it != bonuses.constEnd(); it++) {
-                parent->addItem(static_cast<Bonus *>(*it));
+                parent->addBonus(*it);
+
             }
         }
+        bonuses.clear();
         delete this;
     }
+}
+Tile::~Tile() {
+   for (QList<Bonus *>::ConstIterator it = bonuses.constBegin();
+       it != bonuses.constEnd(); it++) {
+       delete *it;
+   }
+   bonuses.clear();
 }
