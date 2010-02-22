@@ -65,7 +65,7 @@ void Breakout::addPaddle()
 
 void Breakout::addBall()
 {
-    Ball* b = new Ball(100, 100);
+    Ball* b = new Ball(100, 200);
     balls_ += b;
     addItem(b);
 }

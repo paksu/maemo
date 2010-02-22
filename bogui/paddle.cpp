@@ -8,7 +8,6 @@
 Paddle::Paddle(Breakout* b)
     : speed(1.0), width(Paddle::NORMAL), bonusWidth(0), timer(0)
 {
-
     setRect(QRectF(-width/2, -HEIGHT/2, width, HEIGHT));
     setPos(QPointF(400, 400));
     parent = b;

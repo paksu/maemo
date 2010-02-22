@@ -1,7 +1,8 @@
 #ifndef PADDLEBONUS_H
 #define PADDLEBONUS_H
 
-#define BONUSWIDTH 60
+#define BONUSWIDTH 120
+#define BONUSHEIGHT 10
 #define BONUSTIME 500
 
 #include "bonus.h"
