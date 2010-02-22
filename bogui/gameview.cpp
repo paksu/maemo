@@ -21,7 +21,6 @@ GameView::~GameView()
 
 void GameView::startGame()
 {
-    show();
     breakout->init();
     breakout->start();
 }
@@ -29,5 +28,5 @@ void GameView::startGame()
 void GameView::stopGame()
 {
     breakout->stop();
-    hide();
+    emit gameStopped();
 }

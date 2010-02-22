@@ -22,8 +22,6 @@ Breakout::Breakout(GameView* theView)
     back->setZValue(100);
     addItem(back);
     connect(back, SIGNAL(clicked()), theView, SLOT(stopGame()));
-
-    init();
 }
 
 Breakout::~Breakout()
@@ -40,7 +38,6 @@ void Breakout::start()
 {
     qDebug() << "Breakout::start !";
     tick_timer->start();
-
 }
 
 void Breakout::init()
@@ -74,16 +71,16 @@ void Breakout::addBonus(Bonus *b)
     bonuses_ += b;
     addItem(b);
 }
-const QSet<Tile*> & Breakout::tiles()
+QSet<Tile*> & Breakout::tiles()
 {
     return tiles_;
 }
 
-const QSet<Paddle*> & Breakout::paddles()
+QSet<Paddle*> & Breakout::paddles()
 {
     return paddles_;
 }
-const QSet<Bonus *> & Breakout::bonuses()
+QSet<Bonus *> & Breakout::bonuses()
 {
     return bonuses_;
 }
@@ -113,6 +110,7 @@ void Breakout::deletePaddles()
     }
     paddles_.clear();
 }
+
 void Breakout::deleteBalls()
 {
     QList<Ball*> list = balls_.values();
@@ -138,7 +136,6 @@ void Breakout::addScore(int newScore) {
     qDebug() << 100 /  1 + bonusTime.secsTo(QTime::currentTime());
     score += newScore;
     score += newScore * (10 / 1 + bonusTime.secsTo(QTime::currentTime()));
-    // BUGAA ( valgrind )
     scoreText->setText(QString().number(score));
     qDebug() << "Score is " << score;
 }

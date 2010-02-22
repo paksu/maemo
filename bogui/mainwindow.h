@@ -21,6 +21,8 @@ private:
 
 
 private slots:
+    void on_gameView_gameStopped();
+    void on_startGameButton_clicked();
     void on_randomizeButton_clicked();
 };
 

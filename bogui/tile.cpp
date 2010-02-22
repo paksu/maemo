@@ -51,6 +51,7 @@ void Tile::advance(int step)
         return;
     if(health <= 0){
         parent->addScore(score * 1000);
+        breakout()->tiles().remove(this);
         scene()->removeItem(this);
         if(bonuses.size()) {
             for (QList<Bonus *>::ConstIterator it = bonuses.constBegin();
@@ -64,9 +65,9 @@ void Tile::advance(int step)
     }
 }
 Tile::~Tile() {
-   for (QList<Bonus *>::ConstIterator it = bonuses.constBegin();
+    for (QList<Bonus *>::ConstIterator it = bonuses.constBegin();
        it != bonuses.constEnd(); it++) {
        delete *it;
-   }
-   bonuses.clear();
+    }
+    bonuses.clear();
 }

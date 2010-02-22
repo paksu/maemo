@@ -35,9 +35,9 @@ public:
     void deletePaddles();
     void deleteBalls();
     void deleteTiles();
-    const QSet<Tile*>  & tiles();
-    const QSet<Paddle*> & paddles();
-    const QSet<Bonus*> & bonuses();
+    QSet<Tile*>  & tiles();
+    QSet<Paddle*> & paddles();
+    QSet<Bonus*> & bonuses();
 
     static qreal read_acc();
     int getScore();
@@ -49,6 +49,7 @@ public:
 
 private:
     QTimer* tick_timer;
+
     QSet<Ball*> balls_;
     QSet<Tile*> tiles_;
     QSet<Paddle*> paddles_;

@@ -37,3 +37,8 @@ Vector2D CollidingItem::collision(Ball const* ball)
 
     return Vector2D(dir_x, dir_y);
 }
+
+Breakout* CollidingItem::breakout()
+{
+    return static_cast<Breakout*>(scene());
+}

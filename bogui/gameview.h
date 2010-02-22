@@ -15,15 +15,15 @@ public:
     GameView(QWidget* parent = 0);
     ~GameView();
 
+private:
+    Breakout* breakout;
 
 public slots:
     void startGame();
     void stopGame();
 
-
-private:
-    Breakout* breakout;
-
+signals:
+    void gameStopped();
 };
 
 #endif // GAMEVIEW_H

@@ -7,6 +7,7 @@
 
 class Ball;
 class Bonus;
+class Breakout;
 
 class CollidingItem : public QGraphicsRectItem
 {
@@ -14,6 +15,7 @@ public:
     CollidingItem();
     // returns extra impact to add for the ball
     virtual Vector2D collision(Ball const* ball);
+    Breakout* breakout();
 };
 
 #include "ball.h"
