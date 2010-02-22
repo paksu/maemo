@@ -24,8 +24,9 @@ Tile::Tile(int x, int y, int health, Breakout *b)
         tileColors.append(QColor(60,50,0,255));
         tileColors.append(QColor(0,60,60,255));
     }
-    //if(!(rand() % 5))   // 20% chance for a bonus
-    bonuses.append(new BallBonus(pos()));
+
+    Bonus::spawnBonus(&bonuses, pos());
+
 }
 
 void Tile::paint(QPainter * painter, const QStyleOptionGraphicsItem *, QWidget *)
