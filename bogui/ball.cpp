@@ -31,7 +31,6 @@ void Ball::advance(int step)
         } else {
             Breakout* bo = static_cast<Breakout*>(scene());
 
-            qDebug() << "asdsad" <<  pos();
            // demo
            if(pos().x() + size/2 > bo->w() || pos().x() - size/2 < 0 ) {
                speed.x *= -1;

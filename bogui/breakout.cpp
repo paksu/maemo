@@ -5,12 +5,26 @@
 
 qreal Breakout::mousePos = 0;
 
-
-Breakout::Breakout()
+Breakout::Breakout(GameView* theView)
+    : theView(theView)
 {
     tick_timer = new QTimer();
     tick_timer->setInterval(100 / 25);
     QObject::connect(tick_timer, SIGNAL(timeout()), this, SLOT(advance()));
+
+    scoreText = addSimpleText(QString("0"),QFont("System", 16, QFont::Bold));
+    scoreText->setPos(0,450);
+    scoreText->setBrush(QBrush(QColor(255,255,255,150)));
+    scoreText->setVisible(true);
+    scoreText->setZValue(100);
+    score = 0;
+
+    back = new ButtonWidget( w() - 25, 25, QPixmap(":images/back.png"));
+    back->setZValue(100);
+    addItem(back);
+    connect(back, SIGNAL(clicked()), theView, SLOT(stopGame()));
+
+    init();
 }
 
 Breakout::~Breakout()
@@ -18,22 +32,26 @@ Breakout::~Breakout()
     delete tick_timer;
 }
 
+void Breakout::stop()
+{
+    tick_timer->stop();
+}
+
 void Breakout::start()
 {
     qDebug() << "Breakout::start !";
-    addPaddle();
-    addBall();
-    generateLevel(0);
     tick_timer->start();
 }
 
 void Breakout::init()
 {
-    scoreText = addSimpleText(QString("0"),QFont("System", 16, QFont::Bold));
-    scoreText->setPos(0,450);
-    scoreText->setBrush(QBrush(QColor(255,255,255,150)));
-    scoreText->setVisible(true);
     bonusTime = QTime::currentTime();
+    // deletePaddles();
+    // deleteBalls();
+    // deleteTiles();
+    addPaddle();
+    addBall();
+    generateLevel(0);
 }
 
 void Breakout::addPaddle()
@@ -80,7 +98,7 @@ void Breakout::addScore(int newScore) {
     score += newScore;
     score += newScore * (10 / 1 + bonusTime.secsTo(QTime::currentTime()));
     // BUGAA ( valgrind )
-    // scoreText->setText(QString().number(score));
+    scoreText->setText(QString().number(score));
     qDebug() << "Score is " << score;
 }
 
@@ -98,6 +116,7 @@ qreal Breakout::w() const
 {
     return 800.0;
 }
+
 qreal Breakout::h() const
 {
     return 480.0;
