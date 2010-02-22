@@ -29,12 +29,14 @@ void Ball::advance(int step)
        if(!scene()->collidingItems(this).isEmpty()) {
             handleCollision();
         } else {
+            Breakout* bo = static_cast<Breakout*>(scene());
 
+            qDebug() << "asdsad" <<  pos();
            // demo
-           if(pos().x() + size/2 > scene()->width() || pos().x() < 0 ) {
+           if(pos().x() + size/2 > bo->w() || pos().x() - size/2 < 0 ) {
                speed.x *= -1;
            }
-           if(pos().y() + size/2 > scene()->width() || pos().y() < 0) {
+           if(pos().y() + size/2 > bo->h() || pos().y() - size/2 < 0) {
                speed.y *= -1;
            }
         }

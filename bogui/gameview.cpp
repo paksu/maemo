@@ -5,13 +5,14 @@ GameView::GameView(QWidget* parent)
 {
     hide();
     breakout = new Breakout();
-    setSceneRect(0,0, width(), height());
+    setGeometry(0, 0, 800, 480);
+    setSceneRect(0,0, 800, 480);
     setScene(breakout);
 
     setBackgroundBrush(QPixmap(":/images/bg.png"));
     setCacheMode(QGraphicsView::CacheBackground);
     setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
-
+qDebug() << width() << " ----- " << height();
 }
 
 GameView::~GameView()

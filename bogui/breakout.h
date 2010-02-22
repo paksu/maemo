@@ -34,6 +34,8 @@ public:
     static qreal read_acc();
     int getScore();
     void addScore(int score);
+    qreal w() const;
+    qreal h() const;
 
     static qreal mousePos;
 
@@ -44,10 +46,6 @@ private:
     QSet<Paddle*> paddles_;
     QSet<Bonus*> bonuses_;
 
-
-    static int acc_cache;
-    static qreal acc_expfilter_delta;
-    static qreal acc_last;
     int score;
     ButtonWidget* back;
     QGraphicsSimpleTextItem* scoreText;

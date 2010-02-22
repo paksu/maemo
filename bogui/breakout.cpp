@@ -11,8 +11,6 @@ Breakout::Breakout()
     tick_timer = new QTimer();
     tick_timer->setInterval(100 / 25);
     QObject::connect(tick_timer, SIGNAL(timeout()), this, SLOT(advance()));
-
-    setSceneRect (0 , 0, width(), height() );
 }
 
 Breakout::~Breakout()
@@ -94,4 +92,13 @@ int Breakout::getScore() {
 void Breakout::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent)
 {
    Breakout::mousePos = mouseEvent->scenePos().x();
+}
+
+qreal Breakout::w() const
+{
+    return 800.0;
+}
+qreal Breakout::h() const
+{
+    return 480.0;
 }
