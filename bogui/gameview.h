@@ -18,6 +18,7 @@ public:
 
 public slots:
     void startGame();
+    void stopGame();
 
 
 private:

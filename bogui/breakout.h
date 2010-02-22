@@ -11,19 +11,23 @@
 
 #include "tile.h"
 #include "buttonwidget.h"
+#include "gameview.h"
 
 #include "ball.h"
 #include "paddle.h"
 #include "bonus.h"
 
+class GameView;
+
 class Breakout : public QGraphicsScene
 {
     Q_OBJECT
 public:
-    Breakout();
+    Breakout(GameView* theView);
     ~Breakout();
     void init();
     void start();
+    void stop();
     void addPaddle();
     void addBall();
     void addBonus(Bonus *);
@@ -46,6 +50,8 @@ private:
     QSet<Tile*> tiles_;
     QSet<Paddle*> paddles_;
     QSet<Bonus*> bonuses_;
+
+    GameView* theView;
 
     int score;
     ButtonWidget* back;

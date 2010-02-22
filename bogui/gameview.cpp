@@ -4,7 +4,7 @@ GameView::GameView(QWidget* parent)
     : QGraphicsView(parent)
 {
     hide();
-    breakout = new Breakout();
+    breakout = new Breakout(this);
     setGeometry(0, 0, 800, 480);
     setSceneRect(0,0, 800, 480);
     setScene(breakout);
@@ -12,8 +12,6 @@ GameView::GameView(QWidget* parent)
     setBackgroundBrush(QPixmap(":/images/bg.png"));
     setCacheMode(QGraphicsView::CacheBackground);
     setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
-qDebug() << width() << " ----- " << height();
-
 }
 
 GameView::~GameView()
@@ -25,4 +23,10 @@ void GameView::startGame()
 {
     show();
     breakout->start();
+}
+
+void GameView::stopGame()
+{
+    breakout->stop();
+    hide();
 }
