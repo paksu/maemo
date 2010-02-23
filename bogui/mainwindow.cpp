@@ -20,6 +20,8 @@ void MainWindow::on_randomizeButton_clicked()
 void MainWindow::on_startGameButton_clicked()
 {
     ui->widgetStack->setCurrentWidget(ui->gameView);
+    ui->gameView->setGodmode(ui->godmode->isChecked());
+    ui->gameView->setControlMethod(ui->mouse->isChecked());
 }
 
 void MainWindow::on_gameView_gameStopped()

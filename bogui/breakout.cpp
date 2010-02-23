@@ -3,7 +3,7 @@
 
 #include <QDebug>
 
-qreal Breakout::mousePos = 0;
+qreal Breakout::paddlePos = 0;
 
 Breakout::Breakout(GameView* theView)
     : theView(theView)
@@ -84,7 +84,10 @@ QSet<Bonus *> & Breakout::bonuses()
 {
     return bonuses_;
 }
-
+QSet<Ball *> & Breakout::balls()
+{
+    return balls_;
+}
 
 void Breakout::generateLevel(const int & seed) {
     int rows = 10;
@@ -147,7 +150,9 @@ int Breakout::getScore() {
 // mouse
 void Breakout::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent)
 {
-   Breakout::mousePos = mouseEvent->scenePos().x();
+    if(controlMethod) { //  mousecontrol
+        Breakout::paddlePos = mouseEvent->scenePos().x();
+    }
 }
 
 qreal Breakout::w() const
@@ -158,4 +163,16 @@ qreal Breakout::w() const
 qreal Breakout::h() const
 {
     return 480.0;
+}
+void Breakout::setGodmode(bool godmode_) {
+    godmode = godmode_;
+}
+bool Breakout::getGodmode() {
+    return godmode;
+}
+void Breakout::setControlMethod(bool controlMethod_) {
+    controlMethod = controlMethod_;
+}
+bool Breakout::getControlMethod() {
+    return controlMethod;
 }

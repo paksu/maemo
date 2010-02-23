@@ -30,3 +30,11 @@ void GameView::stopGame()
     breakout->stop();
     emit gameStopped();
 }
+void GameView::setGodmode(bool godmode)
+{
+    breakout->setGodmode(godmode);
+}
+void GameView::setControlMethod(bool controlMethod)
+{
+    breakout->setControlMethod(controlMethod);
+}

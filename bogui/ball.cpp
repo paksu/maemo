@@ -28,22 +28,24 @@ void Ball::advance(int step)
        // Collision
        if(!scene()->collidingItems(this).isEmpty()) {
             handleCollision();
-        } else {
-            Breakout* bo = static_cast<Breakout*>(scene());
+        }
+        Breakout* bo = static_cast<Breakout*>(scene());
 
-           // demo
-           if(pos().x() + size/2 > bo->w() || pos().x() - size/2 < 0 ) {
-               speed.x *= -1;
-           }
-           if(pos().y() + size/2 > bo->h() || pos().y() - size/2 < 0) {
-               speed.y *= -1;
-           }
+        if(pos().x() + size/2 > bo->w() || pos().x() - size/2 < 0 ) {
+            speed.x *= -1;
+        }
+        if((pos().y() + size/2 > bo->h()  && bo->getGodmode()) || pos().y() - size/2 < 0) {
+            speed.y *= -1;
+        }
+
+        if(pos().y() - size >  bo->h()) {
+            bo->removeItem(this);
+            bo->balls().remove(this);
+            delete this;
         }
         return;
     }
     else {
-        //qDebug() << "x" << pos.x << "y" << pos.y;
-        //foobar
         setPos(QPointF(pos().x() + speed.x, pos().y() + speed.y));
     }
 }

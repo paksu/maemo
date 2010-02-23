@@ -35,9 +35,14 @@ public:
     void deletePaddles();
     void deleteBalls();
     void deleteTiles();
+    void setGodmode(bool godmode_);
+    void setControlMethod(bool controlMethod_);
+    bool getGodmode();
+    bool getControlMethod();
     QSet<Tile*>  & tiles();
     QSet<Paddle*> & paddles();
     QSet<Bonus*> & bonuses();
+    QSet<Ball*> & balls();
 
     static qreal read_acc();
     int getScore();
@@ -45,7 +50,7 @@ public:
     qreal w() const;
     qreal h() const;
 
-    static qreal mousePos;
+    static qreal paddlePos;
 
 private:
     QTimer* tick_timer;
@@ -61,6 +66,10 @@ private:
     ButtonWidget* back;
     QGraphicsSimpleTextItem* scoreText;
     QTime bonusTime;
+
+    bool godmode;
+    bool controlMethod;
+
 
 protected:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent);

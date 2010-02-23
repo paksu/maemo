@@ -14,7 +14,8 @@ class GameView : public QGraphicsView
 public:
     GameView(QWidget* parent = 0);
     ~GameView();
-
+    void setGodmode(bool godmode);
+    void setControlMethod(bool controlMethod);
 private:
     Breakout* breakout;
 

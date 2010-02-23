@@ -19,7 +19,7 @@ void Paddle::advance(int phase)
         if(!scene()->collidingItems(this).isEmpty()) {
             handleCollision();
         }
-        setPos(QPointF(Breakout::mousePos, 400.0));
+        setPos(QPointF(Breakout::paddlePos, 400.0));
         //setPos(QPointF(read_acc() + 400.0, 400.0));
         return;
     }
