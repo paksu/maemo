@@ -22,9 +22,11 @@ private:
 public slots:
     void startGame();
     void stopGame();
+    void gameEnded(int);
 
 signals:
-    void gameStopped();
+    void gameStopped(int);
+    void noticeGameOver(int);
 };
 
 #endif // GAMEVIEW_H

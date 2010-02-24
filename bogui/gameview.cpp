@@ -28,8 +28,12 @@ void GameView::startGame()
 void GameView::stopGame()
 {
     breakout->stop();
-    emit gameStopped();
 }
+
+void GameView::gameEnded(int score) {
+    emit noticeGameOver(score);
+}
+
 void GameView::setGodmode(bool godmode)
 {
     breakout->setGodmode(godmode);

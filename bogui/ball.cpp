@@ -43,7 +43,10 @@ void Ball::advance(int step)
             bo->balls().remove(this);
             delete this;
         }
-        return;
+        if (bo->balls().isEmpty()) {
+            qDebug() << "game over!!";
+            bo->gameOver();
+        }
     }
     else {
         setPos(QPointF(pos().x() + speed.x, pos().y() + speed.y));

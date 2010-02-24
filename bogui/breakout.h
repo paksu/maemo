@@ -28,6 +28,7 @@ public:
     void init();
     void start();
     void stop();
+    void gameOver();
     void addPaddle();
     void addBall();
     void addBonus(Bonus *);
@@ -70,9 +71,11 @@ private:
     bool godmode;
     bool controlMethod;
 
-
 protected:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent);
+
+signals:
+    void endGame(int);
 };
 
 #endif // BREAKOUT_H

@@ -22,6 +22,7 @@ Breakout::Breakout(GameView* theView)
     back->setZValue(100);
     addItem(back);
     connect(back, SIGNAL(clicked()), theView, SLOT(stopGame()));
+    connect(this, SIGNAL(endGame(int)), theView, SLOT(gameEnded(int)));
 }
 
 Breakout::~Breakout()
@@ -39,6 +40,12 @@ void Breakout::start()
     qDebug() << "Breakout::start !";
     tick_timer->start();
 }
+
+void Breakout::gameOver()
+{
+    emit endGame(score);
+}
+
 
 void Breakout::init()
 {
