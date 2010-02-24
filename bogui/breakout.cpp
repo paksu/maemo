@@ -17,6 +17,8 @@ Breakout::Breakout(GameView* theView)
     scoreText->setVisible(true);
     scoreText->setZValue(100);
     score = 0;
+    controlMethod = true;
+    godmode = false;
 
     back = new ButtonWidget( w() - 25, 25, QPixmap(":images/back.png"));
     back->setZValue(100);
