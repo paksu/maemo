@@ -1,5 +1,7 @@
 #include "gameview.h"
 
+#include <QDebug>
+
 GameView::GameView(QWidget* parent)
     : QGraphicsView(parent)
 {
@@ -27,7 +29,9 @@ void GameView::startGame()
 
 void GameView::stopGame()
 {
+    qDebug() << "GameView::stopGame()";
     breakout->stop();
+    emit gameStopped();
 }
 
 void GameView::gameEnded(int score) {

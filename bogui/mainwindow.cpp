@@ -12,14 +12,6 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::gameEnded(int score)
-{
-    ui->gameOverLabel->show();
-    ui->scoreLabel->setText("score: " + QString().number(score));
-    ui->scoreLabel->show();
-    on_gameView_gameStopped();
-}
-
 void MainWindow::on_randomizeButton_clicked()
 {
    ui->seed->setValue(rand()%15);
@@ -33,8 +25,18 @@ void MainWindow::on_startGameButton_clicked()
     showFullScreen();
 }
 
+#include <QDebug>
 void MainWindow::on_gameView_gameStopped()
 {
+    qDebug() << "on_gameView_gameStopped";
     ui->widgetStack->setCurrentWidget(ui->verticalLayoutWidget);
     showMaximized();
+}
+
+void MainWindow::on_gameView_noticeGameOver(int score)
+{
+    ui->gameOverLabel->show();
+    ui->scoreLabel->setText("score: " + QString().number(score));
+    ui->scoreLabel->show();
+    on_gameView_gameStopped();
 }

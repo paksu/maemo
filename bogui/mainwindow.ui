@@ -265,6 +265,7 @@
    <header>gameview.h</header>
    <slots>
     <signal>gameStopped()</signal>
+    <signal>noticeGameOver(int)</signal>
     <slot>startGame()</slot>
    </slots>
   </customwidget>

@@ -21,7 +21,7 @@ private:
 
 
 private slots:
-    void gameEnded(int score);
+    void on_gameView_noticeGameOver(int);
     void on_gameView_gameStopped();
     void on_startGameButton_clicked();
     void on_randomizeButton_clicked();

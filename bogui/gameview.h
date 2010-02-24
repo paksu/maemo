@@ -25,7 +25,7 @@ public slots:
     void gameEnded(int);
 
 signals:
-    void gameStopped(int);
+    void gameStopped();
     void noticeGameOver(int);
 };
 
