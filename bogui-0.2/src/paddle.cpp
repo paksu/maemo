@@ -21,6 +21,7 @@ void Paddle::advance(int phase)
         if(!scene()->collidingItems(this).isEmpty()) {
             handleCollision();
         }
+
         if (breakout()->controlMethod) {
             setPos(QPointF(Breakout::paddlePos, 400.0));
         }
@@ -29,7 +30,20 @@ void Paddle::advance(int phase)
         }
         return;
     }
-    //setPos(QPointF(400, 400));
+
+    QPointF last = this->pos();
+    qreal nextPos = Breakout::paddlePos;
+    Breakout *b = static_cast<Breakout *>(scene());
+    nextPos = nextPos < width/2 ? width/2 : nextPos;
+    nextPos = (nextPos + width/2) > b->w() ? (b->w() - width/2) : nextPos;
+
+    setPos(QPointF(nextPos, 400.0));
+
+    if(!scene()->collidingItems(this).isEmpty()) {
+        // HAI! this werk. no?
+        setPos(last);
+    }
+
 }
 
 void Paddle::paint(QPainter * painter, const QStyleOptionGraphicsItem *, QWidget *)

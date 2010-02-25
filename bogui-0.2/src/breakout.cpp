@@ -79,7 +79,8 @@ void Breakout::addPaddle()
 
 void Breakout::addBall()
 {
-    Ball* b = new Ball(100, 200);
+
+    Ball* b = new Ball(paddles().toList().first()->pos().x() , paddles().toList().first()->pos().y() - 20);
     balls_ += b;
     addItem(b);
 }

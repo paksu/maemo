@@ -53,8 +53,6 @@ void Tile::advance(int step)
         return;
     if(health <= 0){
         parent->addScore(score * 1000);
-        breakout()->tiles().remove(this);
-        scene()->removeItem(this);
         if(bonuses.size()) {
             for (QList<Bonus *>::ConstIterator it = bonuses.constBegin();
                 it != bonuses.constEnd(); it++) {
@@ -63,6 +61,12 @@ void Tile::advance(int step)
             }
         }
         bonuses.clear();
+
+        breakout()->tiles().remove(this);
+        if(breakout()->tiles().isEmpty()) {
+            qDebug() << "WIN --> GAME OVER";
+            breakout()->gameOver();
+        }
         delete this;
     }
 }
@@ -72,4 +76,5 @@ Tile::~Tile() {
        delete *it;
     }
     bonuses.clear();
+    //breakout()->removeItem(this);
 }
