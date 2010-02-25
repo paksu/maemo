@@ -101,15 +101,7 @@ QSet<Ball *> & Breakout::balls()
 void Breakout::generateLevel(const int & seed) {
     int rows = 10;
     BreakoutLevelGenerator generator(seed);
-    //generator.generate_level(this);
-
-    for (int i = rows;i > 0;i--) {
-        for (int j = 1;j < (width()/60);j++) {
-            Tile* t = new Tile(j,i,6-i/2, this);
-            tiles_ += t;
-            this->addItem(t);
-       }
-    }
+    generator.generate_level(this);
 }
 
 void Breakout::deletePaddles()

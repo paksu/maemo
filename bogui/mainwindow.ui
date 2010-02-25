@@ -195,9 +195,9 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
-         <widget class="QLabel" name="scoreLabel">
+         <widget class="QLabel" name="gameOverLabel">
           <property name="enabled">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="font">
            <font>
@@ -210,9 +210,9 @@
          </widget>
         </item>
         <item>
-         <widget class="QLabel" name="gameOverLabel">
+         <widget class="QLabel" name="scoreLabel">
           <property name="enabled">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="font">
            <font>
