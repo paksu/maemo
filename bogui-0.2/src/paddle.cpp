@@ -19,11 +19,17 @@ void Paddle::advance(int phase)
         if(!scene()->collidingItems(this).isEmpty()) {
             handleCollision();
         }
-        setPos(QPointF(Breakout::paddlePos, 400.0));
-        //setPos(QPointF(read_acc() + 400.0, 400.0));
         return;
     }
-    //setPos(QPointF(400, 400));
+    if(scene()->collidingItems(this).isEmpty()) {
+        // HAI! this werk. no?
+        qreal x = Breakout::paddlePos;
+        Breakout *b = static_cast<Breakout *>(scene());
+        x = x < width/2 ? width/2 : x;
+        x = (x + width/2) > b->w() ? (b->w() - width/2) : x;
+        setPos(QPointF(x, 400.0));
+    }
+
 }
 
 void Paddle::paint(QPainter * painter, const QStyleOptionGraphicsItem *, QWidget *)
