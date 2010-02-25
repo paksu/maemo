@@ -9,8 +9,8 @@
 Ball::Ball()
   : CollidingItem()
 {
-    setPos(QPointF(220, 180));
-    speed = Vector2D(1, 1);
+    setPos(QPointF(400, 350));
+    speed = Vector2D(1, -1);
     size = 20;
     setRect(-size/2,-size/2,size,size);
 }
@@ -18,7 +18,7 @@ Ball::Ball(int x, int y)
   : CollidingItem()
 {
     setPos(QPointF(x, y));
-    speed = Vector2D(1, 1);
+    speed = Vector2D(1, -1);
     size = 20;
     setRect(-size/2,-size/2,size,size);
 }
