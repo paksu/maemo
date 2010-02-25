@@ -43,7 +43,9 @@ QRectF Tile::boundingRect() const
 Vector2D Tile::collision(Ball const* ball)
 {
     health--;
-    return CollidingItem::collision(ball);
+    Vector2D impulse = CollidingItem::collision(ball);
+    impulse.x = ball->speed.x;
+    return impulse;
 }
 void Tile::advance(int step)
 {

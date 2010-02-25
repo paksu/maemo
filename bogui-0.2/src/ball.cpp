@@ -10,7 +10,7 @@ Ball::Ball()
   : CollidingItem()
 {
     setPos(QPointF(220, 180));
-    speed = Vector2D(1, 3);
+    speed = Vector2D(1, 1);
     size = 20;
     setRect(-size/2,-size/2,size,size);
 }
@@ -18,7 +18,7 @@ Ball::Ball(int x, int y)
   : CollidingItem()
 {
     setPos(QPointF(x, y));
-    speed = Vector2D(1, 3);
+    speed = Vector2D(1, 1);
     size = 20;
     setRect(-size/2,-size/2,size,size);
 }
@@ -83,10 +83,11 @@ void Ball::handleCollision() {
         }
     }
     collision_sum /= qreal(collision_list.size());
-    collision_sum.x = -qAbs(collision_sum.x);
+   // collision_sum.x = -qAbs(collision_sum.x);
     collision_sum.y = -qAbs(collision_sum.y);
     if (collision_sum.x < -0.1)
-        speed.x *= collision_sum.x;
+        qDebug() << "collision_sum.x  " << collision_sum.x;
+        speed.x = collision_sum.x;
     if (collision_sum.y < -0.1)
         speed.y *= collision_sum.y;
 }

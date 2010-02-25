@@ -52,7 +52,10 @@ Vector2D Paddle::collision(Ball const* ball)
 {
     qDebug() << "paddle collision";
     Vector2D impulse = CollidingItem::collision(ball);
-    //impulse.x += (x1 - x2) / 5.0;
+    qreal deltax = ball->x() - x();
+    qDebug() << "deltax:" << deltax;
+    impulse.x = (deltax/(width/2)) * 2;
+    qDebug() << "impulse.x" <<  impulse.x << "impulse.y" <<  impulse.y;
     return impulse;
 }
 void Paddle::handleCollision() {
