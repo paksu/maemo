@@ -62,10 +62,13 @@ void Breakout::init()
     deleteTiles();
     addPaddle();
     addBall();
-    generateLevel(0);
+    generateLevel(seed);
 }
 
-
+void Breakout::setSeed(int seed)
+{
+    this->seed = seed;
+}
 
 void Breakout::addPaddle()
 {

@@ -38,6 +38,7 @@ public:
     void deleteTiles();
     void setGodmode(bool godmode_);
     void setControlMethod(bool controlMethod_);
+    void setSeed(int seed);
     bool getGodmode();
     bool getControlMethod();
     QSet<Tile*>  & tiles();
@@ -52,6 +53,7 @@ public:
     qreal h() const;
 
     static qreal paddlePos;
+    bool controlMethod;
 
 private:
     QTimer* tick_timer;
@@ -63,13 +65,14 @@ private:
 
     GameView* theView;
 
+    int seed;
     int score;
     ButtonWidget* back;
     QGraphicsSimpleTextItem* scoreText;
     QTime bonusTime;
 
     bool godmode;
-    bool controlMethod;
+
 
 protected:
     void mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent);

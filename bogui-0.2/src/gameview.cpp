@@ -21,7 +21,7 @@ GameView::~GameView()
     delete breakout;
 }
 
-void GameView::startGame()
+void GameView::startGame(int seed)
 {
     if (breakout) {
         delete breakout;
@@ -29,6 +29,7 @@ void GameView::startGame()
     }
     breakout = new Breakout(this);
     setScene(breakout);
+    breakout->setSeed(seed);
     breakout->init();
     breakout->start();
 }

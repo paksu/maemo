@@ -273,27 +273,10 @@
    <slots>
     <signal>gameStopped()</signal>
     <signal>noticeGameOver(int)</signal>
-    <slot>startGame()</slot>
+    <slot>startGame(int)</slot>
    </slots>
   </customwidget>
  </customwidgets>
  <resources/>
- <connections>
-  <connection>
-   <sender>startGameButton</sender>
-   <signal>clicked()</signal>
-   <receiver>gameView</receiver>
-   <slot>startGame()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>150</x>
-     <y>108</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>510</x>
-     <y>291</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

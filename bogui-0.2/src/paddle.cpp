@@ -11,6 +11,8 @@ Paddle::Paddle(Breakout* b)
     setRect(QRectF(-width/2, -HEIGHT/2, width, HEIGHT));
     setPos(QPointF(400, 400));
     parent = b;
+    pmap1 = QPixmap(":images/paddle.png");
+    pmap2 = QPixmap(":images/big_paddle.png");
 }
 
 void Paddle::advance(int phase)
@@ -19,8 +21,12 @@ void Paddle::advance(int phase)
         if(!scene()->collidingItems(this).isEmpty()) {
             handleCollision();
         }
-        setPos(QPointF(Breakout::paddlePos, 400.0));
-        //setPos(QPointF(read_acc() + 400.0, 400.0));
+        if (breakout()->controlMethod) {
+            setPos(QPointF(Breakout::paddlePos, 400.0));
+        }
+        else {
+            setPos(QPointF(read_acc() + 400.0, 400.0));
+        }
         return;
     }
     //setPos(QPointF(400, 400));
@@ -29,7 +35,7 @@ void Paddle::advance(int phase)
 void Paddle::paint(QPainter * painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
     if(timer && bonusWidth) {
-        painter->drawPixmap(-bonusWidth/2, -HEIGHT/2, QPixmap(":images/big_paddle.png"));
+        painter->drawPixmap(-bonusWidth/2, -HEIGHT/2, pmap2);
         //hitbox
         painter->drawRect(rect());
         timer--;
@@ -37,7 +43,7 @@ void Paddle::paint(QPainter * painter, const QStyleOptionGraphicsItem *, QWidget
             setRect(QRectF(-width/2, -HEIGHT/2, width, HEIGHT));
         }
     } else {
-        painter->drawPixmap(-width/2, -HEIGHT/2, QPixmap(":images/paddle.png"));
+        painter->drawPixmap(-width/2, -HEIGHT/2, pmap1);
         //hitbox
         painter->drawRect(rect());
     }

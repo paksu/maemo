@@ -30,6 +30,8 @@ private:
     int timer;
     Breakout* parent;
     void handleCollision();
+    QPixmap pmap1;
+    QPixmap pmap2;
 };
 
 #include "breakout.h"

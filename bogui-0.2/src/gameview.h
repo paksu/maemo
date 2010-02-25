@@ -18,9 +18,10 @@ public:
     void setControlMethod(bool controlMethod);
 private:
     Breakout* breakout;
+    int seed;
 
 public slots:
-    void startGame();
+    void startGame(int);
     void stopGame();
     void gameEnded(int);
 

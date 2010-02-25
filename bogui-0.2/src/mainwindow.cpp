@@ -24,6 +24,7 @@ void MainWindow::on_startGameButton_clicked()
     ui->widgetStack->setCurrentWidget(ui->gameView);
     ui->gameView->setGodmode(ui->godmode->isChecked());
     ui->gameView->setControlMethod(ui->mouse->isChecked());
+    ui->gameView->startGame(ui->seed->value());
     showFullScreen();
 }
 
