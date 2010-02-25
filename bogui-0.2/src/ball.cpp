@@ -71,6 +71,7 @@ void Ball::handleCollision() {
     QList <QGraphicsItem *> collision_list = scene()->collidingItems(this);
 
     Vector2D collision_sum(0.0, 0.0);
+    int collision_count = 0;
 
     for (QList<QGraphicsItem *>::ConstIterator it = collision_list.constBegin();
         it != collision_list.constEnd(); it++) {
@@ -80,14 +81,14 @@ void Ball::handleCollision() {
             || bo->paddles().contains(static_cast<const Paddle*>(*it)) ) {
             CollidingItem* item = static_cast<CollidingItem *>(*it);
             collision_sum += item->collision(this);
+            collision_count++;
         }
     }
     collision_sum /= qreal(collision_list.size());
    // collision_sum.x = -qAbs(collision_sum.x);
     collision_sum.y = -qAbs(collision_sum.y);
-    if (collision_sum.x < -0.1)
-        qDebug() << "collision_sum.x  " << collision_sum.x;
+    if (collision_sum.x < -0.1 && collision_count)
         speed.x = collision_sum.x;
-    if (collision_sum.y < -0.1)
+    if (collision_sum.y < -0.1  && collision_count)
         speed.y *= collision_sum.y;
 }
