@@ -30,6 +30,11 @@ Breakout::Breakout(GameView* theView)
 Breakout::~Breakout()
 {
     delete tick_timer;
+    delete back;
+    delete scoreText;
+    deletePaddles();
+    deleteBalls();
+    deleteTiles();
 }
 
 void Breakout::stop()

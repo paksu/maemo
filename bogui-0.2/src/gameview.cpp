@@ -23,6 +23,12 @@ GameView::~GameView()
 
 void GameView::startGame()
 {
+    if (breakout) {
+        delete breakout;
+        breakout = NULL;
+    }
+    breakout = new Breakout(this);
+    setScene(breakout);
     breakout->init();
     breakout->start();
 }
