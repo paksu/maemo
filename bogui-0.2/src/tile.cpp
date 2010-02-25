@@ -76,5 +76,5 @@ Tile::~Tile() {
        delete *it;
     }
     bonuses.clear();
-    breakout()->removeItem(this);
+    //breakout()->removeItem(this);
 }
