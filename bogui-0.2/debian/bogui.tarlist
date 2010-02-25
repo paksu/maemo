@@ -1,0 +1,10 @@
+755 root root . usr  /
+755 root root . usr/sbin  /
+755 root root . usr/bin  /
+755 root root . usr/bin/bogui  debian/bogui/usr/bin/bogui
+755 root root . usr/share  /
+755 root root . usr/share/doc  /
+755 root root . usr/share/doc/bogui  /
+644 root root . usr/share/doc/bogui/copyright debian/bogui/usr/share/doc/bogui/copyright
+644 root root . usr/share/doc/bogui/changelog.Debian.gz debian/bogui/usr/share/doc/bogui/changelog.Debian.gz
+644 root root . usr/share/doc/bogui/README.Debian debian/bogui/usr/share/doc/bogui/README.Debian

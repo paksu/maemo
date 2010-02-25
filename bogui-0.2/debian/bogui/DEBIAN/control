@@ -1,0 +1,11 @@
+Package: bogui
+Version: 0.2-1
+Architecture: armel
+Maintainer: unknown <maintainer@email.org>
+Installed-Size: 400
+Depends: libc6 (>= 2.5.0-1), libgcc1 (>= 1:4.2.1), libqt4-core (>= 4.5.3~git20090723), libqt4-gui (>= 4.5.3~git20090723), libstdc++6 (>= 4.2.1)
+Section: user/Other
+Priority: extra
+Homepage: <insert the upstream URL, if relevant>
+Description: <insert up to 60 chars description>
+ <insert long description, indented with spaces>
