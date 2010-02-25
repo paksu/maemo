@@ -21,13 +21,18 @@ void Paddle::advance(int phase)
         }
         return;
     }
-    if(scene()->collidingItems(this).isEmpty()) {
+
+    QPointF last = this->pos();
+    qreal nextPos = Breakout::paddlePos;
+    Breakout *b = static_cast<Breakout *>(scene());
+    nextPos = nextPos < width/2 ? width/2 : nextPos;
+    nextPos = (nextPos + width/2) > b->w() ? (b->w() - width/2) : nextPos;
+
+    setPos(QPointF(nextPos, 400.0));
+
+    if(!scene()->collidingItems(this).isEmpty()) {
         // HAI! this werk. no?
-        qreal x = Breakout::paddlePos;
-        Breakout *b = static_cast<Breakout *>(scene());
-        x = x < width/2 ? width/2 : x;
-        x = (x + width/2) > b->w() ? (b->w() - width/2) : x;
-        setPos(QPointF(x, 400.0));
+        setPos(last);
     }
 
 }
