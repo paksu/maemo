@@ -1,6 +1,7 @@
 #include "util.h"
 
 #include <QtGlobal>
+#include <QDebug>
 #include <QFile>
 #include <math.h>
 

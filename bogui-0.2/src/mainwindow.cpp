@@ -31,7 +31,6 @@ void MainWindow::on_startGameButton_clicked()
 #include <QDebug>
 void MainWindow::on_gameView_gameStopped()
 {
-    qDebug() << "on_gameView_gameStopped";
     ui->widgetStack->setCurrentWidget(ui->verticalLayoutWidget);
     showMaximized();
 }

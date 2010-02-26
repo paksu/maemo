@@ -33,7 +33,6 @@ void Paddle::advance(int phase)
     setPos(QPointF(nextPos, 400.0));
 
     if(!scene()->collidingItems(this).isEmpty()) {
-        // HAI! this werk. no?
         setPos(last);
     }
 
@@ -43,16 +42,12 @@ void Paddle::paint(QPainter * painter, const QStyleOptionGraphicsItem *, QWidget
 {
     if(timer && bonusWidth) {
         painter->drawPixmap(-bonusWidth/2, -HEIGHT/2, pmap2);
-        //hitbox
-        painter->drawRect(rect());
         timer--;
         if(!timer) {
             setRect(QRectF(-width/2, -HEIGHT/2, width, HEIGHT));
         }
     } else {
         painter->drawPixmap(-width/2, -HEIGHT/2, pmap1);
-        //hitbox
-        painter->drawRect(rect());
     }
 }
 
@@ -63,12 +58,9 @@ QRectF Paddle::boundingRect() const
 
 Vector2D Paddle::collision(Ball const* ball)
 {
-    qDebug() << "paddle collision";
     Vector2D impulse = CollidingItem::collision(ball);
     qreal deltax = ball->x() - x();
-    qDebug() << "deltax:" << deltax;
     impulse.x = (deltax/(width/2)) * (ball->speed.x + 2);
-    qDebug() << "impulse.x" <<  impulse.x << "impulse.y" <<  impulse.y;
     return impulse;
 }
 void Paddle::handleCollision() {
