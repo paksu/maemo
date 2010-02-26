@@ -44,7 +44,6 @@ void Breakout::stop()
 
 void Breakout::start()
 {
-    qDebug() << "Breakout::start !";
     tick_timer->start();
 }
 
@@ -150,7 +149,6 @@ void Breakout::addScore(int newScore) {
     score += newScore;
     score += newScore * (10 / 1 + bonusTime.secsTo(QTime::currentTime()));
     scoreText->setText(QString().number(score));
-    qDebug() << "Score is " << score;
 }
 
 int Breakout::getScore() {

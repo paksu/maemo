@@ -20,14 +20,13 @@ Ball::Ball(int x, int y)
 {
     setPos(QPointF(x, y));
     lastPos = pos();
-    speed = Vector2D(1, -1);
+    speed = Vector2D(1, -3);
     size = 20;
     setRect(-size/2,-size/2,size,size);
 }
 void Ball::advance(int step)
 {
     if(!step) {
-       // Collision
        if(!scene()->collidingItems(this).isEmpty()) {
             handleCollision();
         }
@@ -46,7 +45,6 @@ void Ball::advance(int step)
             delete this;
         }
         if (bo->balls().isEmpty()) {
-            qDebug() << "game over!!";
             bo->gameOver();
         }
     }
@@ -58,11 +56,7 @@ void Ball::advance(int step)
 
 void Ball::paint(QPainter * painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
-    //qDebug() << "x" << pos.x << "y" << pos.y;
     painter->drawPixmap(-size/2,-size/2,QPixmap(":/images/ball.png"));
-
-    //hitbox
-    painter->drawRect(rect());
 }
 
 QRectF Ball::boundingRect() const
@@ -89,13 +83,7 @@ void Ball::handleCollision() {
     }
     if (collision_count)
     {
-        qDebug() << "collision_sum_y"  << collision_sum.y;
-
-    collision_sum /= qreal(collision_list.size());
-   // collision_sum.x = -qAbs(collision_sum.x);
-    //collision_sum.y *= -1;
-    //qDebug() << "collision_sum_y"  << collision_sum.y;
-
+        collision_sum /= qreal(collision_list.size());
         speed.x = collision_sum.x;
         speed.y = collision_sum.y;
     }

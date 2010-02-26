@@ -51,5 +51,4 @@ void Bonus::spawnBonus(QList<Bonus *> *bonuses, QPointF pos) {
 
 Bonus::~Bonus()
 {
-    qDebug() << "DEAD BONUS. TYPE : " << this;
 }

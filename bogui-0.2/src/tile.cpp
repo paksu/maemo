@@ -64,7 +64,6 @@ void Tile::advance(int step)
 
         breakout()->tiles().remove(this);
         if(breakout()->tiles().isEmpty()) {
-            qDebug() << "WIN --> GAME OVER";
             breakout()->gameOver();
         }
         delete this;
@@ -76,5 +75,4 @@ Tile::~Tile() {
        delete *it;
     }
     bonuses.clear();
-    //breakout()->removeItem(this);
 }
