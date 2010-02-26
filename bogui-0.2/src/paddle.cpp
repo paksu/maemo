@@ -21,18 +21,11 @@ void Paddle::advance(int phase)
         if(!scene()->collidingItems(this).isEmpty()) {
             handleCollision();
         }
-
-        if (breakout()->controlMethod) {
-            setPos(QPointF(Breakout::paddlePos, 400.0));
-        }
-        else {
-            setPos(QPointF(read_acc() + 400.0, 400.0));
-        }
         return;
     }
 
     QPointF last = this->pos();
-    qreal nextPos = Breakout::paddlePos;
+    qreal nextPos = breakout()->controlMethod ? nextPos = Breakout::paddlePos :  nextPos = read_acc() + 400;
     Breakout *b = static_cast<Breakout *>(scene());
     nextPos = nextPos < width/2 ? width/2 : nextPos;
     nextPos = (nextPos + width/2) > b->w() ? (b->w() - width/2) : nextPos;
@@ -75,6 +68,7 @@ Vector2D Paddle::collision(Ball const* ball)
     qreal deltax = ball->x() - x();
     qDebug() << "deltax:" << deltax;
     impulse.x = (deltax/(width/2)) * 2;
+    impulse.x += ball->speed.x;
     qDebug() << "impulse.x" <<  impulse.x << "impulse.y" <<  impulse.y;
     return impulse;
 }
