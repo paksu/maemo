@@ -22,9 +22,9 @@ void MainWindow::on_randomizeButton_clicked()
 void MainWindow::on_startGameButton_clicked()
 {
     ui->widgetStack->setCurrentWidget(ui->gameView);
+    ui->gameView->startGame(ui->seed->value());
     ui->gameView->setGodmode(ui->godmode->isChecked());
     ui->gameView->setControlMethod(ui->mouse->isChecked());
-    ui->gameView->startGame(ui->seed->value());
     showFullScreen();
 }
 
