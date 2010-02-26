@@ -24,20 +24,26 @@ void BreakoutLevelGenerator::generate_level(Breakout* bo)
     QList< QList<int> > grid;
     for (int x = 0;x < ((bo->width() - TILE_W*2)/60); x++) {
         grid.append(QList<int>());
-        for (int y = 0;y < 30 ;y++) {
+        for (int y = 0;y < 20 ;y++) {
             grid[x].append(0);
         }
     }
 
     for (int i = 5; i; --i) {
-        if (!(qrand() % 2))
-            add_sine(grid);
+        switch (qrand()%3) {
+            case 0:
+                add_sine(grid);
+                break;
 
-        if (!(qrand() % 5))
-            add_rand(grid);
+            case 1:
+                if (qrand() % 2)
+                    add_rand(grid);
+                break;
 
-        if (!(qrand() % 2))
-            add_bleed(grid);
+            case 2:
+                add_bleed(grid);
+                break;
+        }
     }
 
     int x = 0;

@@ -11,7 +11,7 @@ Ball::Ball()
 {
     setPos(QPointF(400, 350));
     lastPos = pos();
-    speed = Vector2D(1, -1);
+    speed = Vector2D(3, -3);
     size = 20;
     setRect(-size/2,-size/2,size,size);
 }
@@ -20,7 +20,7 @@ Ball::Ball(int x, int y)
 {
     setPos(QPointF(x, y));
     lastPos = pos();
-    speed = Vector2D(1, -1);
+    speed = Vector2D(3, -3);
     size = 20;
     setRect(-size/2,-size/2,size,size);
 }
