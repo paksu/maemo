@@ -10,6 +10,7 @@ Ball::Ball()
   : CollidingItem()
 {
     setPos(QPointF(400, 350));
+    lastPos = pos();
     speed = Vector2D(1, -1);
     size = 20;
     setRect(-size/2,-size/2,size,size);
@@ -18,6 +19,7 @@ Ball::Ball(int x, int y)
   : CollidingItem()
 {
     setPos(QPointF(x, y));
+    lastPos = pos();
     speed = Vector2D(1, -1);
     size = 20;
     setRect(-size/2,-size/2,size,size);
@@ -49,6 +51,7 @@ void Ball::advance(int step)
         }
     }
     else {
+        lastPos = pos();
         setPos(QPointF(pos().x() + speed.x, pos().y() + speed.y));
     }
 }
@@ -84,11 +87,16 @@ void Ball::handleCollision() {
             collision_count++;
         }
     }
+    if (collision_count)
+    {
+        qDebug() << "collision_sum_y"  << collision_sum.y;
+
     collision_sum /= qreal(collision_list.size());
    // collision_sum.x = -qAbs(collision_sum.x);
-    collision_sum.y = -qAbs(collision_sum.y);
-    if (collision_sum.x < -0.1 && collision_count)
+    //collision_sum.y *= -1;
+    //qDebug() << "collision_sum_y"  << collision_sum.y;
+
         speed.x = collision_sum.x;
-    if (collision_sum.y < -0.1  && collision_count)
-        speed.y *= collision_sum.y;
+        speed.y = collision_sum.y;
+    }
 }
