@@ -26,7 +26,7 @@ Vector2D CollidingItem::collision(Ball const* ball)
     else /* ( h <= qAbs(y1 - y2) && (h > qAbs(ball->lastPos.y() - y1)) ) */ {
         qDebug() << 2;
         // collision to top / bottom
-        dir_y = y1 < y2 ? 1.0 : -1.0;
+        dir_y = -ball->speed.y;
     } /*
     else {
         qDebug() << 3;
