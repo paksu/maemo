@@ -16,6 +16,7 @@ class Ball : public CollidingItem
         Ball();
         Ball(int x, int y);
         Vector2D speed;
+        QPointF lastPos;
         double size;
         void paint(QPainter * painter, const QStyleOptionGraphicsItem * option, QWidget * widget);
         QRectF boundingRect() const;

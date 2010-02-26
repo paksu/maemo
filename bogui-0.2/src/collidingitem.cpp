@@ -18,22 +18,22 @@ Vector2D CollidingItem::collision(Ball const* ball)
 
     qDebug() << pos() << " || " << " :: " << target_size << " : " << target_pos << " || " << w << " " << h << " " << qAbs(x1 - x2) << " " << qAbs(y1 - y2);
 
-    if ( w <= qAbs(x1 - x2) && h > qAbs(y1 - y2) ) {
+    if ( (w > qAbs(ball->lastPos.x() - x1)) && (w <= qAbs(x1 - x2))) {
         qDebug() << 1;
         // collision to side
         dir_x = x1 < x2 ? 1.0 : -1.0;
     }
-    else if ( h <= qAbs(y1 - y2) && w > qAbs(x1 - x2) ) {
+    else /* ( h <= qAbs(y1 - y2) && (h > qAbs(ball->lastPos.y() - y1)) ) */ {
         qDebug() << 2;
         // collision to top / bottom
         dir_y = y1 < y2 ? 1.0 : -1.0;
-    }
+    } /*
     else {
         qDebug() << 3;
         // collision to corner
         dir_x = x1 < x2 ? 1.0 : -1.0;
         dir_y = y1 < y2 ? 1.0 : -1.0;
-    }
+    }*/
 
     return Vector2D(dir_x, dir_y);
 }
