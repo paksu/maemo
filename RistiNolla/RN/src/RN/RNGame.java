@@ -16,6 +16,8 @@ public class RNGame extends CustomItem implements ItemCommandListener {
     NetHandler net;
 
     int myRole = InitPacket.TYPE_UNDEFINED;
+    Board board;
+    Point center;
 
     int w;
 
@@ -25,26 +27,28 @@ public class RNGame extends CustomItem implements ItemCommandListener {
         net = new NetHandler(this);
         net.start();
         setItemCommandListener(this);
+        board = new Board(this);
+        center = new Point(0,0);
     }
 
     protected int getMinContentWidth() {
-        return 50;
+        return 221;
     }
 
     protected int getMinContentHeight() {
-        return 50;
+        return 221;
     }
 
     protected int getPrefContentWidth(int height) {
-        return 80;
+        return 221;
     }
 
     protected int getPrefContentHeight(int width) {
-        return 80;
+        return 221;
     }
 
     protected void paint(Graphics g, int w, int h) {
-        // paint grid
+         board.paint(g, center,w ,h);
     }
 
     public void commandAction(Command c, Item item) {
