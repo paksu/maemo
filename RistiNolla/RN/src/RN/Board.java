@@ -4,17 +4,18 @@ import java.util.Hashtable;
 import javax.microedition.lcdui.Graphics;
 
 public class Board {
-    Hashtable table = new Hashtable();
-    RNGame parent;
+    private Hashtable table = new Hashtable();
+    private RNGame parent;
 
     public Board(RNGame game) {
         parent = game;
+        set(new Point(0,0), new Piece(0));
     }
 
     public void set(Point p, Piece piece) {
-        if(table.contains(p.x)) {
+        if(table.containsKey(p.x)) {
             Hashtable row = (Hashtable) table.get(p.x);
-            if(row.contains(p.y)) {
+            if(row.containsKey(p.y)) {
                 System.out.println("There is already a piece in " + p.x + "," + p.y +"\n");
             } else {
                 System.out.println("Inserting piece " + piece.toString() + " to "  + p.x + "," + p.y +"\n");
@@ -33,11 +34,11 @@ public class Board {
         return false;
     }
 
-    void paint(Graphics g, Point p, int w, int h) {
+    void paint(Graphics g, Point center, int w, int h) {
         // clear screen
         g.setColor(255,255,255);
         g.fillRect(0, 0, w, h);
-        
+
         // draw grid
         g.setColor(0,0,0);
         int i, j;
@@ -47,13 +48,25 @@ public class Board {
             g.drawLine(0, i, w, i);
         }
 
-        System.out.println("foo");
         
-        for(i = p.x.intValue() - 5;i < p.x.intValue() + 5;i++) {
-            for(j = p.y.intValue() - 5;j < p.y.intValue() + 5;j++) {
-                System.out.println(i + "," + j);
+        for(i = center.x.intValue() - 10;i < center.x.intValue() + 10;i++) {
+            for(j = center.y.intValue() - 10;j < center.y.intValue() + 10;j++) {
+                Piece p = get(i,j);
+                if(p != null) {
+                    p.paint(g, center.x.intValue() - i, center.y.intValue() - j);
+                }
             }
-            System.out.println("\n");
+           
         }
+    }
+    public Piece get(int x, int y) {
+        if(table.containsKey(new Integer(x))) {
+            Hashtable row = (Hashtable) table.get(new Integer(x));
+            if(row.containsKey(new Integer(y))) {
+                return (Piece) row.get(new Integer(y));
+            }
+
+        }
+        return null;
     }
 }
