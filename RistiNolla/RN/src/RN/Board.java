@@ -9,10 +9,12 @@ public class Board {
     private Hashtable table = new Hashtable();
     private RNGame parent;
     private Point cursor;
+    private String text;
 
     public Board(RNGame game) {
         parent = game;
         cursor = new Point(0,0);
+        text = "";
         set(new Point(1,0), new Piece(1));
         set(new Point(0,0), new Piece(0));
         set(new Point(2,0), new Piece(1));
@@ -100,7 +102,8 @@ public class Board {
     void paint(Graphics g, Point center, int w, int h) {
         // clear screen
         g.setColor(255,255,255);
-        g.fillRect(0, 0, w, h);
+        g.fillRect(0, 0, parent.getWidth(), parent.getHeight());
+
 
         // draw grid
         g.setColor(0,0,0);
@@ -121,8 +124,11 @@ public class Board {
             }
            
         }
-        //draw cursor
-        g.drawRect((cursor.x.intValue()+10)*10+1, (cursor.y.intValue()+10)*10+1, 8, 8);
+        //draw cursor at the center of the screen
+        g.drawRect( (cursor.x.intValue() + 10)*10 +1, (cursor.y.intValue() + 10)*10 + 1, 8, 8);
+
+        //draw text
+        g.drawString(text, 10, h + 10, 0);
     }
 
     public Piece get(int x, int y) {
@@ -138,6 +144,13 @@ public class Board {
 
     public void moveCursor(Command c) {
 
+    }
+    
+    public void setText(String s){
+        text = s;
+    }
+    public void clearText(){
+        text = "";
     }
 
     public Piece get(Point p) {

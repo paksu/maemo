@@ -16,13 +16,18 @@ public class RNGame extends Canvas implements CommandListener {
 
     public static final int PIECE_X = 0;
     public static final int PIECE_O = 1;
+    public static final int STATE_INITIALIZING = 0; // waiting other player etc
+    public static final int STATE_TURN = 1;         // own turn
+    public static final int STATE_WAITING = 2;      // waiting for next turn
+
+
+
     NetHandler net;
 
     int myRole = InitPacket.TYPE_UNDEFINED;
     Board board;
     Point center;
-
-    int w;
+    int state;
 
     RNGame(String title) {
        // super(title);
@@ -33,6 +38,7 @@ public class RNGame extends Canvas implements CommandListener {
         center = new Point(0,0);
         System.out.println("fooooo");
         myRole = InitPacket.TYPE_X;
+        state = RNGame.STATE_INITIALIZING;
     }
 
     protected int getMinContentWidth() {
@@ -56,15 +62,19 @@ public class RNGame extends Canvas implements CommandListener {
         switch(keyCode) {
             case -1: // UP
                 center.y = new Integer(center.y.intValue() + 1);
+                board.setText("up");
                 break;
             case -2: // DOWN
                 center.y = new Integer(center.y.intValue() - 1);
+                board.setText("down");
                 break;
             case -3: // LEFT
                 center.x = new Integer(center.x.intValue() + 1);
+                board.setText("left");
                 break;
             case -4: // RIGHT
                 center.x = new Integer(center.x.intValue() - 1);
+                board.setText("right");
                 break;
             case -5: // ENTER
                 insertPiece(center);
@@ -109,8 +119,8 @@ public class RNGame extends Canvas implements CommandListener {
     }
 
     protected void paint(Graphics g) {
-         //System.out.println(center.x + "," + center.y);
-         board.paint(g, center, getWidth(), getHeight());
+         // Paint a square board
+         board.paint(g, center, getWidth(), getWidth());
 
     }
 
@@ -119,9 +129,11 @@ public class RNGame extends Canvas implements CommandListener {
     }
 
     public void insertPiece(Point p) {
-        if(myRole != InitPacket.TYPE_UNDEFINED){
+        if(myRole != InitPacket.TYPE_UNDEFINED || state != RNGame.STATE_TURN){
             Piece piece = new Piece(myRole);
             board.set(p, piece);
+        } else {
+            System.out.println("Error in insertPiece myRole:" + myRole + "and state" + state);
         }
     }
     
