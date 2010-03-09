@@ -51,6 +51,39 @@ public class RNGame extends CustomItem implements ItemCommandListener {
          board.paint(g, center,w ,h);
     }
 
+    protected void keyPressed(int keyCode) {
+        System.out.println("foooooooooooooooo");
+        //super.keyPressed(keyCode);
+    }
+
+    protected boolean traverse(int dir, int viewportWidth, int viewportHeight, int[] visRect_inout) {
+/*
+        switch(dir) {
+            case Canvas.UP:
+               // center.y = new Integer(center.y.intValue() - 1);
+                System.out.println("case 1");
+                break;
+            case Canvas.RIGHT:
+               // center.x = new Integer(center.y.intValue() + 1);
+                System.out.println("case 2");
+                break;
+            case Canvas.LEFT:
+               // center.x = new Integer(center.y.intValue() - 1);
+                System.out.println("case 5");
+                break;
+            case Canvas.DOWN:
+               // center.y = new Integer(center.y.intValue() + 1);
+                System.out.println("case 6");
+                break;
+            default:
+                System.out.println(dir + " : " + viewportWidth + "," + viewportHeight);
+                break;
+        } */
+        System.out.println(dir + " : " + viewportWidth + "," + viewportHeight);
+        return true;
+    }
+
+
     public void commandAction(Command c, Item item) {
         // move cursor in grid and send answer over net
     }

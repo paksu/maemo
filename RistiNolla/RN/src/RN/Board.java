@@ -1,15 +1,22 @@
 package RN;
 
 import java.util.Hashtable;
+import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.Graphics;
 
 public class Board {
     private Hashtable table = new Hashtable();
     private RNGame parent;
+    private Point cursor;
 
     public Board(RNGame game) {
         parent = game;
+        cursor = new Point(0,0);
+        set(new Point(1,0), new Piece(1));
         set(new Point(0,0), new Piece(0));
+        set(new Point(2,0), new Piece(1));
+        set(new Point(3,0), new Piece(0));
+
     }
 
     public void set(Point p, Piece piece) {
@@ -48,7 +55,7 @@ public class Board {
             g.drawLine(0, i, w, i);
         }
 
-        
+        //draw Pieces
         for(i = center.x.intValue() - 10;i < center.x.intValue() + 10;i++) {
             for(j = center.y.intValue() - 10;j < center.y.intValue() + 10;j++) {
                 Piece p = get(i,j);
@@ -58,7 +65,10 @@ public class Board {
             }
            
         }
+        //draw cursor
+        g.drawRect((cursor.x.intValue()+10)*10+1, (cursor.y.intValue()+10)*10+1, 8, 8);
     }
+
     public Piece get(int x, int y) {
         if(table.containsKey(new Integer(x))) {
             Hashtable row = (Hashtable) table.get(new Integer(x));
@@ -68,5 +78,9 @@ public class Board {
 
         }
         return null;
+    }
+
+    public void moveCursor(Command c){
+
     }
 }
