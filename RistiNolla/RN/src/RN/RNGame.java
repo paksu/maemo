@@ -19,6 +19,7 @@ public class RNGame extends Canvas implements CommandListener {
     public static final int STATE_INITIALIZING = 0; // waiting other player etc
     public static final int STATE_TURN = 1;         // own turn
     public static final int STATE_WAITING = 2;      // waiting for next turn
+    public static final int STATE_GAMEOVER = 3;     
 
 
 
@@ -30,13 +31,11 @@ public class RNGame extends Canvas implements CommandListener {
     int state;
 
     RNGame(String title) {
-       // super(title);
         net = new NetHandler(this);
         net.start();
         setCommandListener(this);
         board = new Board(this);
         center = new Point(0,0);
-        System.out.println("fooooo");
         myRole = InitPacket.TYPE_UNDEFINED;
         state = RNGame.STATE_INITIALIZING;
         board.setText("Waiting for other player");
@@ -74,11 +73,14 @@ public class RNGame extends Canvas implements CommandListener {
                 center.x = new Integer(center.x.intValue() - 1);
                 break;
             case -5: // ENTER
-                insertPiece(center, myRole);
-                state = RNGame.STATE_WAITING;
-                net.send(new TurnPacket(center));
-                if(board.getWinner() != -1) {
-                    System.out.println("WINNER IS " + board.getWinner());
+                if(insertPiece(center, myRole)) {
+                    state = RNGame.STATE_WAITING;
+                    net.send(new TurnPacket(center));
+                    if(board.getWinner() != -1) {
+                        System.out.println("WINNER IS " + board.getWinner());
+                        board.setText("You win");
+                        state = RNGame.STATE_GAMEOVER;
+                    }
                 }
                 break;
             default:
@@ -124,10 +126,14 @@ public class RNGame extends Canvas implements CommandListener {
             Point point = new Point(packet.x, packet.y);
             int otherRole = 1 - myRole;
             insertPiece(point, otherRole);
-            state = RNGame.STATE_TURN;
-            board.setText("Your turn");
+            if(board.getWinner() != -1) {
+                board.setText("You loose");
+                state = RNGame.STATE_GAMEOVER;
+            } else {
+                state = RNGame.STATE_TURN;
+                board.setText("Your turn");
+            }
             repaint();
-            // XXX do stuffz
         }
         
         //chat.setString(packet.toString());
