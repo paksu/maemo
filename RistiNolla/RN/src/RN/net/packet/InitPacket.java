@@ -2,8 +2,8 @@ package RN.net.packet;
 
 public class InitPacket extends Packet {
     public static final int TYPE_UNDEFINED = -1;
-    public static final int TYPE_X = 0;
-    public static final int TYPE_O = 1;
+    public static final int TYPE_O = 0;
+    public static final int TYPE_X = 1;
     private int type = TYPE_UNDEFINED;
 
     protected InitPacket(int type) throws Exception {

@@ -28,10 +28,11 @@ public class RNGame extends Canvas implements CommandListener {
        // super(title);
         net = new NetHandler(this);
         net.start();
-       // setItemCommandListener(this);
+        setCommandListener(this);
         board = new Board(this);
         center = new Point(0,0);
         System.out.println("fooooo");
+        myRole = InitPacket.TYPE_X;
     }
 
     protected int getMinContentWidth() {
@@ -51,8 +52,32 @@ public class RNGame extends Canvas implements CommandListener {
     }
 
     protected void keyPressed(int keyCode) {
-        System.out.println("foooooooooooooooo");
-        //super.keyPressed(keyCode);
+        System.out.println(keyCode);
+        switch(keyCode) {
+            case -1: // UP
+                center.y = new Integer(center.y.intValue() + 1);
+                break;
+            case -2: // DOWN
+                center.y = new Integer(center.y.intValue() - 1);
+                break;
+            case -3: // LEFT
+                center.x = new Integer(center.x.intValue() + 1);
+                break;
+            case -4: // RIGHT
+                center.x = new Integer(center.x.intValue() - 1);
+                break;
+            case -5: // ENTER
+                insertPiece(center);
+                if(board.getWinner() != -1) {
+                    System.out.println("WINNER IS " + board.getWinner());
+                }
+                break;
+            default:
+                break;
+        }
+        System.out.println(center.x + "," + center.y);
+
+        repaint();
     }
 
     public void commandAction(Command c, Item item) {
@@ -84,13 +109,20 @@ public class RNGame extends Canvas implements CommandListener {
     }
 
     protected void paint(Graphics g) {
-         System.out.println(getWidth() + "," + getHeight());
-         board.paint(g, new Point(0,0), getWidth(), getHeight());
+         //System.out.println(center.x + "," + center.y);
+         board.paint(g, center, getWidth(), getHeight());
 
     }
 
     public void commandAction(Command c, Displayable d) {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void insertPiece(Point p) {
+        if(myRole != InitPacket.TYPE_UNDEFINED){
+            Piece piece = new Piece(myRole);
+            board.set(p, piece);
+        }
     }
     
 }

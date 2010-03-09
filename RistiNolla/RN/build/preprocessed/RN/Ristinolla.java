@@ -113,8 +113,8 @@ public class Ristinolla extends MIDlet implements CommandListener {
             }//GEN-BEGIN:|7-commandAction|7|7-postCommandAction
         }//GEN-END:|7-commandAction|7|7-postCommandAction
         // write post-action user code here
-    }//GEN-BEGIN:|7-commandAction|8|38-postAction
-    //</editor-fold>//GEN-END:|7-commandAction|8|38-postAction
+    }//GEN-BEGIN:|7-commandAction|8|
+    //</editor-fold>//GEN-END:|7-commandAction|8|
 
 
     //<editor-fold defaultstate="collapsed" desc=" Generated Getter: exitCommand ">//GEN-BEGIN:|18-getter|0|18-preInit

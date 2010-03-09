@@ -39,50 +39,54 @@ public class Board {
     }
 
     public int getWinner() {
-        for (Enumeration p = table.elements(); p.hasMoreElements();) {
-            Piece piece = (Piece)p.nextElement();
-            Point pos   = piece.getPos();
-            int type    = piece.getType();
-            for (int i = 1; i <= 5; i++) {
-                Point matchPos   = new Point(pos.x.intValue() + i, pos.y.intValue());
-                Piece matchPiece = get(matchPos);
-                if (matchPiece == null) {
-                    continue;
+        for (Enumeration en1 = table.elements(); en1.hasMoreElements();) {
+            Hashtable h = (Hashtable) en1.nextElement();
+            for (Enumeration en2 = h.elements(); en2.hasMoreElements();) {
+                Piece piece = (Piece)en2.nextElement();
+
+                Point pos   = piece.getPos();
+                int type    = piece.getType();
+                for (int i = 1; i <= 5; i++) {
+                    Point matchPos   = new Point(pos.x.intValue() + i, pos.y.intValue());
+                    Piece matchPiece = get(matchPos);
+                    if (matchPiece == null) {
+                        break;
+                    }
+                    int matchType    = matchPiece.getType();
+                    if (matchType != type) {
+                        break;
+                    }
+                    if (i == 5) {
+                        return piece.getType();
+                    }
                 }
-                int matchType    = matchPiece.getType();
-                if (matchType != type) {
-                    break;
+                for (int i = 1; i <= 5; i++) {
+                    Point matchPos   = new Point(pos.x.intValue(), pos.y.intValue() + i);
+                    Piece matchPiece = get(matchPos);
+                    if (matchPiece == null) {
+                        break;
+                    }
+                    int matchType    = matchPiece.getType();
+                    if (matchType != type) {
+                        break;
+                    }
+                    if (i == 5) {
+                        return piece.getType();
+                    }
                 }
-                if (i == 5) {
-                    return piece.getType();
-                }
-            }
-            for (int i = 1; i <= 5; i++) {
-                Point matchPos   = new Point(pos.x.intValue(), pos.y.intValue() + i);
-                Piece matchPiece = get(matchPos);
-                if (matchPiece == null) {
-                    continue;
-                }
-                int matchType    = matchPiece.getType();
-                if (matchType != type) {
-                    break;
-                }
-                if (i == 5) {
-                    return piece.getType();
-                }
-            }
-            for (int i = 1; i <= 5; i++) {
-                Point matchPos   = new Point(pos.x.intValue() + i, pos.y.intValue() + i);
-                Piece matchPiece = get(matchPos);
-                if (matchPiece == null) {
-                    continue;
-                }
-                int matchType    = matchPiece.getType();
-                if (matchType != type) {
-                    break;
-                }
-                if (i == 5) {
-                    return piece.getType();
+                for (int i = 1; i <= 5; i++) {
+                    Point matchPos   = new Point(pos.x.intValue() + i, pos.y.intValue() + i);
+                    Piece matchPiece = get(matchPos);
+                    if (matchPiece == null) {
+                        break;
+                    }
+                    int matchType    = matchPiece.getType();
+                    if (matchType != type) {
+                        break;
+                    }
+                    if (i == 5) {
+                        return piece.getType();
+                    }
                 }
             }
         }
