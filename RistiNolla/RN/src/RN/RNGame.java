@@ -37,8 +37,9 @@ public class RNGame extends Canvas implements CommandListener {
         board = new Board(this);
         center = new Point(0,0);
         System.out.println("fooooo");
-        myRole = InitPacket.TYPE_X;
+        myRole = InitPacket.TYPE_UNDEFINED;
         state = RNGame.STATE_INITIALIZING;
+        board.setText("Waiting for other player");
     }
 
     protected int getMinContentWidth() {
@@ -62,22 +63,19 @@ public class RNGame extends Canvas implements CommandListener {
         switch(keyCode) {
             case -1: // UP
                 center.y = new Integer(center.y.intValue() + 1);
-                board.setText("up");
                 break;
             case -2: // DOWN
                 center.y = new Integer(center.y.intValue() - 1);
-                board.setText("down");
                 break;
             case -3: // LEFT
                 center.x = new Integer(center.x.intValue() + 1);
-                board.setText("left");
-                break;
+               break;
             case -4: // RIGHT
                 center.x = new Integer(center.x.intValue() - 1);
-                board.setText("right");
                 break;
             case -5: // ENTER
-                insertPiece(center);
+                insertPiece(center, myRole);
+                state = RNGame.STATE_WAITING;
                 net.send(new TurnPacket(center));
                 if(board.getWinner() != -1) {
                     System.out.println("WINNER IS " + board.getWinner());
@@ -105,6 +103,16 @@ public class RNGame extends Canvas implements CommandListener {
         if (arg instanceof InitPacket) {
             InitPacket packet = (InitPacket)arg;
             myRole = packet.getType();
+            if(myRole == RNGame.PIECE_O) {
+                // zero starts
+                state = RNGame.STATE_TURN;
+                board.setText("Your Turn");
+                repaint();
+            } else if(myRole == RNGame.PIECE_X) {
+                state = RNGame.STATE_WAITING;
+                board.setText("Waiting for other player to insert his piece");
+                repaint();
+            }
         }
 
         if (arg instanceof TurnPacket) {
@@ -114,7 +122,11 @@ public class RNGame extends Canvas implements CommandListener {
             }
             TurnPacket packet = (TurnPacket)arg;
             Point point = new Point(packet.x, packet.y);
-            insertPiece(point);
+            int otherRole = 1 - myRole;
+            insertPiece(point, otherRole);
+            state = RNGame.STATE_TURN;
+            board.setText("Your turn");
+            repaint();
             // XXX do stuffz
         }
         
@@ -131,14 +143,22 @@ public class RNGame extends Canvas implements CommandListener {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public boolean insertPiece(Point p) {
-        if(myRole != InitPacket.TYPE_UNDEFINED || state != RNGame.STATE_TURN){
-            Piece piece = new Piece(myRole);
-            return board.set(p, piece);
+    public boolean insertPiece(Point p, int type) {
+        System.out.println("Type is " + type + " myRole is " + myRole);
+        if(myRole != InitPacket.TYPE_UNDEFINED && state == RNGame.STATE_TURN && type == myRole){
+            board.setText("Waiting for other player to insert his piece");
+            return board.set(p, new Piece(type));
+        } else if(state == RNGame.STATE_WAITING && type != myRole) {
+            board.setText("Your turn");
+            return board.set(p, new Piece(type));
+        } else if(state == RNGame.STATE_INITIALIZING && type != myRole) {
+            board.setText("Your turn");
+            return board.set(p, new Piece(type));
         } else {
-            System.out.println("Error in insertPiece myRole:" + myRole + "and state" + state);
+            System.out.println("Error in insertPiece type:" + type + " and myRole:" + myRole + "and state" + state);
             return false;
         }
     }
+
     
 }
