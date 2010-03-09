@@ -4,15 +4,19 @@ import RN.net.packet.TurnPacket;
 import RN.net.packet.InitPacket;
 import RN.net.NetHandler;
 import RN.net.packet.Packet;
+import javax.microedition.lcdui.Canvas;
 import javax.microedition.lcdui.Command;
-import javax.microedition.lcdui.CustomItem;
+import javax.microedition.lcdui.CommandListener;
+import javax.microedition.lcdui.Displayable;
 import javax.microedition.lcdui.Graphics;
 import javax.microedition.lcdui.Item;
-import javax.microedition.lcdui.ItemCommandListener;
+
 import javax.microedition.lcdui.TextField;
 
-public class RNGame extends CustomItem implements ItemCommandListener {
-    TextField chat;
+public class RNGame extends Canvas implements CommandListener {
+
+    public static final int PIECE_X = 0;
+    public static final int PIECE_O = 1;
     NetHandler net;
 
     int myRole = InitPacket.TYPE_UNDEFINED;
@@ -21,14 +25,14 @@ public class RNGame extends CustomItem implements ItemCommandListener {
 
     int w;
 
-    RNGame(String title, TextField debugField) {
-        super(title);
-        chat = debugField;
+    RNGame(String title) {
+       // super(title);
         net = new NetHandler(this);
         net.start();
-        setItemCommandListener(this);
+       // setItemCommandListener(this);
         board = new Board(this);
         center = new Point(0,0);
+        System.out.println("fooooo");
     }
 
     protected int getMinContentWidth() {
@@ -47,17 +51,13 @@ public class RNGame extends CustomItem implements ItemCommandListener {
         return 221;
     }
 
-    protected void paint(Graphics g, int w, int h) {
-         board.paint(g, center,w ,h);
-    }
-
     protected void keyPressed(int keyCode) {
         System.out.println("foooooooooooooooo");
         //super.keyPressed(keyCode);
     }
-
-    protected boolean traverse(int dir, int viewportWidth, int viewportHeight, int[] visRect_inout) {
 /*
+    protected boolean traverse(int dir, int viewportWidth, int viewportHeight, int[] visRect_inout) {
+
         switch(dir) {
             case Canvas.UP:
                // center.y = new Integer(center.y.intValue() - 1);
@@ -78,14 +78,18 @@ public class RNGame extends CustomItem implements ItemCommandListener {
             default:
                 System.out.println(dir + " : " + viewportWidth + "," + viewportHeight);
                 break;
-        } */
+        } 
         System.out.println(dir + " : " + viewportWidth + "," + viewportHeight);
         return true;
     }
-
+*/
 
     public void commandAction(Command c, Item item) {
         // move cursor in grid and send answer over net
+    }
+
+    public void setCenter(Point newCenter) {
+
     }
 
     public void update(Packet arg) {
@@ -106,6 +110,16 @@ public class RNGame extends CustomItem implements ItemCommandListener {
         }
         
         //chat.setString(packet.toString());
+    }
+
+    protected void paint(Graphics g) {
+         System.out.println(getWidth() + "," + getHeight());
+         board.paint(g, new Point(0,0), getWidth(), getHeight());
+
+    }
+
+    public void commandAction(Command c, Displayable d) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
     
 }

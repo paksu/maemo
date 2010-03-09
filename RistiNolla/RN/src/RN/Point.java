@@ -7,5 +7,4 @@ public class Point {
         x = new Integer(X);
         y = new Integer(Y);
     }
-
 }

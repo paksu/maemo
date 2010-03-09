@@ -1,5 +1,6 @@
 package RN;
 
+import java.util.Enumeration;
 import java.util.Hashtable;
 import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.Graphics;
@@ -20,6 +21,7 @@ public class Board {
     }
 
     public void set(Point p, Piece piece) {
+        piece.setPos(p);
         if(table.containsKey(p.x)) {
             Hashtable row = (Hashtable) table.get(p.x);
             if(row.containsKey(p.y)) {
@@ -36,6 +38,56 @@ public class Board {
         }
     }
 
+    public int getWinner() {
+        for (Enumeration p = table.elements(); p.hasMoreElements();) {
+            Piece piece = (Piece)p.nextElement();
+            Point pos   = piece.getPos();
+            int type    = piece.getType();
+            for (int i = 1; i <= 5; i++) {
+                Point matchPos   = new Point(pos.x.intValue() + i, pos.y.intValue());
+                Piece matchPiece = get(matchPos);
+                if (matchPiece == null) {
+                    continue;
+                }
+                int matchType    = matchPiece.getType();
+                if (matchType != type) {
+                    break;
+                }
+                if (i == 5) {
+                    return piece.getType();
+                }
+            }
+            for (int i = 1; i <= 5; i++) {
+                Point matchPos   = new Point(pos.x.intValue(), pos.y.intValue() + i);
+                Piece matchPiece = get(matchPos);
+                if (matchPiece == null) {
+                    continue;
+                }
+                int matchType    = matchPiece.getType();
+                if (matchType != type) {
+                    break;
+                }
+                if (i == 5) {
+                    return piece.getType();
+                }
+            }
+            for (int i = 1; i <= 5; i++) {
+                Point matchPos   = new Point(pos.x.intValue() + i, pos.y.intValue() + i);
+                Piece matchPiece = get(matchPos);
+                if (matchPiece == null) {
+                    continue;
+                }
+                int matchType    = matchPiece.getType();
+                if (matchType != type) {
+                    break;
+                }
+                if (i == 5) {
+                    return piece.getType();
+                }
+            }
+        }
+        return -1;
+    }
 
     public boolean gameOver() {
         return false;
@@ -80,7 +132,11 @@ public class Board {
         return null;
     }
 
-    public void moveCursor(Command c){
+    public void moveCursor(Command c) {
 
+    }
+
+    public Piece get(Point p) {
+        return get(p.x.intValue(), p.y.intValue());
     }
 }

@@ -19,11 +19,10 @@ public class Ristinolla extends MIDlet implements CommandListener {
     private Command exitCommand;
     private Command okCommand;
     private Command exitCommand1;
+    private Command exitCommand2;
     private Form form;
     private StringItem stringItem;
-    private Form Game;
-    private RNGame rnGame;
-    private TextField textField;
+    private RNGame rnGame1;
     //</editor-fold>//GEN-END:|fields|0|
 
     /**
@@ -95,26 +94,28 @@ public class Ristinolla extends MIDlet implements CommandListener {
      */
     public void commandAction(Command command, Displayable displayable) {//GEN-END:|7-commandAction|0|7-preCommandAction
         // write pre-action user code here
-        if (displayable == Game) {//GEN-BEGIN:|7-commandAction|1|29-preAction
-            if (command == exitCommand1) {//GEN-END:|7-commandAction|1|29-preAction
+        if (displayable == form) {//GEN-BEGIN:|7-commandAction|1|19-preAction
+            if (command == exitCommand) {//GEN-END:|7-commandAction|1|19-preAction
                 // write pre-action user code here
-                switchDisplayable(null, getForm());//GEN-LINE:|7-commandAction|2|29-postAction
+                exitMIDlet();//GEN-LINE:|7-commandAction|2|19-postAction
                 // write post-action user code here
-            }//GEN-BEGIN:|7-commandAction|3|19-preAction
-        } else if (displayable == form) {
-            if (command == exitCommand) {//GEN-END:|7-commandAction|3|19-preAction
+            } else if (command == okCommand) {//GEN-LINE:|7-commandAction|3|24-preAction
                 // write pre-action user code here
-                exitMIDlet();//GEN-LINE:|7-commandAction|4|19-postAction
+                switchDisplayable(null, getRnGame1());//GEN-LINE:|7-commandAction|4|24-postAction
                 // write post-action user code here
-            } else if (command == okCommand) {//GEN-LINE:|7-commandAction|5|24-preAction
+                System.out.println("asdasdasd");
+            }//GEN-BEGIN:|7-commandAction|5|38-preAction
+        } else if (displayable == rnGame1) {
+            if (command == exitCommand2) {//GEN-END:|7-commandAction|5|38-preAction
                 // write pre-action user code here
-                switchDisplayable(null, getGame());//GEN-LINE:|7-commandAction|6|24-postAction
+                switchDisplayable(null, getForm());//GEN-LINE:|7-commandAction|6|38-postAction
                 // write post-action user code here
             }//GEN-BEGIN:|7-commandAction|7|7-postCommandAction
         }//GEN-END:|7-commandAction|7|7-postCommandAction
         // write post-action user code here
-    }//GEN-BEGIN:|7-commandAction|8|
-    //</editor-fold>//GEN-END:|7-commandAction|8|
+    }//GEN-BEGIN:|7-commandAction|8|38-postAction
+    //</editor-fold>//GEN-END:|7-commandAction|8|38-postAction
+
 
     //<editor-fold defaultstate="collapsed" desc=" Generated Getter: exitCommand ">//GEN-BEGIN:|18-getter|0|18-preInit
     /**
@@ -194,53 +195,44 @@ public class Ristinolla extends MIDlet implements CommandListener {
     }
     //</editor-fold>//GEN-END:|28-getter|2|
 
-    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: Game ">//GEN-BEGIN:|22-getter|0|22-preInit
-    /**
-     * Returns an initiliazed instance of Game component.
-     * @return the initialized component instance
-     */
-    public Form getGame() {
-        if (Game == null) {//GEN-END:|22-getter|0|22-preInit
-            // write pre-init user code here
-            Game = new Form("form1", new Item[] { getRnGame(), getTextField() });//GEN-BEGIN:|22-getter|1|22-postInit
-            Game.addCommand(getExitCommand1());
-            Game.setCommandListener(this);//GEN-END:|22-getter|1|22-postInit
-            // write post-init user code here
-        }//GEN-BEGIN:|22-getter|2|
-        return Game;
-    }
-    //</editor-fold>//GEN-END:|22-getter|2|
 
-    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: rnGame ">//GEN-BEGIN:|27-getter|0|27-preInit
-    /**
-     * Returns an initiliazed instance of rnGame component.
-     * @return the initialized component instance
-     */
-    public RNGame getRnGame() {
-        if (rnGame == null) {//GEN-END:|27-getter|0|27-preInit
-            // write pre-init user code here
-//GEN-LINE:|27-getter|1|27-postInit
-            // write post-init user code here
-            rnGame = new RNGame("tehTitle", getTextField());
-        }//GEN-BEGIN:|27-getter|2|
-        return rnGame;
-    }
-    //</editor-fold>//GEN-END:|27-getter|2|
 
-    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: textField ">//GEN-BEGIN:|31-getter|0|31-preInit
+
+
+
+
+
+
+    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: rnGame1 ">//GEN-BEGIN:|32-getter|0|32-preInit
     /**
-     * Returns an initiliazed instance of textField component.
+     * Returns an initiliazed instance of rnGame1 component.
      * @return the initialized component instance
      */
-    public TextField getTextField() {
-        if (textField == null) {//GEN-END:|31-getter|0|31-preInit
+    public RNGame getRnGame1() {
+        if (rnGame1 == null) {//GEN-END:|32-getter|0|32-preInit
             // write pre-init user code here
-            textField = new TextField("textField", null, 32, TextField.ANY);//GEN-LINE:|31-getter|1|31-postInit
+//GEN-LINE:|32-getter|1|32-postInit
             // write post-init user code here
-        }//GEN-BEGIN:|31-getter|2|
-        return textField;
+            rnGame1 = new RNGame("foo");
+        }//GEN-BEGIN:|32-getter|2|
+        return rnGame1;
     }
-    //</editor-fold>//GEN-END:|31-getter|2|
+    //</editor-fold>//GEN-END:|32-getter|2|
+
+    //<editor-fold defaultstate="collapsed" desc=" Generated Getter: exitCommand2 ">//GEN-BEGIN:|37-getter|0|37-preInit
+    /**
+     * Returns an initiliazed instance of exitCommand2 component.
+     * @return the initialized component instance
+     */
+    public Command getExitCommand2() {
+        if (exitCommand2 == null) {//GEN-END:|37-getter|0|37-preInit
+            // write pre-init user code here
+            exitCommand2 = new Command("Exit", Command.EXIT, 0);//GEN-LINE:|37-getter|1|37-postInit
+            // write post-init user code here
+        }//GEN-BEGIN:|37-getter|2|
+        return exitCommand2;
+    }
+    //</editor-fold>//GEN-END:|37-getter|2|
 
     /**
      * Returns a display instance.
