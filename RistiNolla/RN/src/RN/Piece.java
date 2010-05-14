@@ -4,9 +4,9 @@ package RN;
 import javax.microedition.lcdui.Graphics;
 
 class Piece {
-    byte type;
+    int type;
     Point pos;
-    public Piece(byte newType) {
+    public Piece(int newType) {
         type = newType;
     }
 
@@ -15,10 +15,6 @@ class Piece {
     }
     Point getPos() {
         return pos;
-    }
-
-    public Piece(int newType) {
-        type = newType;
     }
 
     void paint(Graphics g, int i, int j) {
