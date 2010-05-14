@@ -10,11 +10,14 @@ class Piece {
         type = newType;
     }
 
-    void setPos(Point p) {
+    public void setPos(Point p) {
         pos = p;
     }
-    Point getPos() {
+    public Point getPos() {
         return pos;
+    }
+    public int getType() {
+        return type;
     }
 
     void paint(Graphics g, int i, int j) {

@@ -35,8 +35,48 @@ public class Board {
         for (Enumeration p = table.elements(); p.hasMoreElements();) {
             Piece piece = (Piece)p.nextElement();
             Point pos   = piece.getPos();
+            int type    = piece.getType();
             for (int i = 1; i <= 5; i++) {
-                Point matchPos = new Point(pos.x.intValue() + i, pos.y.intValue());
+                Point matchPos   = new Point(pos.x.intValue() + i, pos.y.intValue());
+                Piece matchPiece = get(matchPos);
+                if (matchPiece == null) {
+                    continue;
+                }
+                int matchType    = matchPiece.getType();
+                if (matchType != type) {
+                    break;
+                }
+                if (i == 5) {
+                    return piece.getType();
+                }
+            }
+            for (int i = 1; i <= 5; i++) {
+                Point matchPos   = new Point(pos.x.intValue(), pos.y.intValue() + i);
+                Piece matchPiece = get(matchPos);
+                if (matchPiece == null) {
+                    continue;
+                }
+                int matchType    = matchPiece.getType();
+                if (matchType != type) {
+                    break;
+                }
+                if (i == 5) {
+                    return piece.getType();
+                }
+            }
+            for (int i = 1; i <= 5; i++) {
+                Point matchPos   = new Point(pos.x.intValue() + i, pos.y.intValue() + i);
+                Piece matchPiece = get(matchPos);
+                if (matchPiece == null) {
+                    continue;
+                }
+                int matchType    = matchPiece.getType();
+                if (matchType != type) {
+                    break;
+                }
+                if (i == 5) {
+                    return piece.getType();
+                }
             }
         }
         return -1;
@@ -80,5 +120,8 @@ public class Board {
 
         }
         return null;
+    }
+    public Piece get(Point p) {
+        return get(p.x.intValue(), p.y.intValue());
     }
 }
