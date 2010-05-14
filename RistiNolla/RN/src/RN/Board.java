@@ -1,5 +1,6 @@
 package RN;
 
+import java.util.Enumeration;
 import java.util.Hashtable;
 import javax.microedition.lcdui.Graphics;
 
@@ -12,6 +13,7 @@ public class Board {
     }
 
     public void set(Point p, Piece piece) {
+        piece.setPos(p);
         if(table.contains(p.x)) {
             Hashtable row = (Hashtable) table.get(p.x);
             if(row.contains(p.y)) {
@@ -28,6 +30,16 @@ public class Board {
         }
     }
 
+    public int getWinner() {
+        for (Enumeration p = table.elements(); p.hasMoreElements();) {
+            Piece piece = (Piece)p.nextElement();
+            Point pos   = piece.getPos();
+            for (int i = 1; i <= 5; i++) {
+                Point matchPos = new Point(pos.x.intValue() + i, pos.y.intValue());
+            }
+        }
+        return -1;
+    }
 
     public boolean gameOver() {
         return false;

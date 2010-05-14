@@ -12,6 +12,8 @@ import javax.microedition.lcdui.ItemCommandListener;
 import javax.microedition.lcdui.TextField;
 
 public class RNGame extends CustomItem implements ItemCommandListener {
+    public static final int PIECE_X = 0;
+    public static final int PIECE_O = 1;
     TextField chat;
     NetHandler net;
 
