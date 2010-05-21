@@ -22,6 +22,7 @@ class Piece {
     }
 
     void paint(Graphics g, int i, int j) {
-        g.drawString(types[type] , (i+10)*10 +2, (j+10)*10-3, 0);
+        // Stupid adjustments to get the piece to the center of the box
+        g.drawString(types[type], (i + 10)*10 +2, (j + 10)*10-3, 0);
     }
 }

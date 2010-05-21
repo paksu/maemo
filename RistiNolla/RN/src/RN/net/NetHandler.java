@@ -35,6 +35,10 @@ public class NetHandler implements Runnable {
         thread = null;
     }
 
+    public void send(Packet p) throws IOException {
+        output.write(p.toBuffer());
+    }
+
     public void run() {
         try {
             conn = (SocketConnection) Connector.open(serverAddr);

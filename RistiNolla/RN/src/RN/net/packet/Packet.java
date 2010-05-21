@@ -15,4 +15,8 @@ public class Packet {
         }
         return result;
     }
+
+    public int toBuffer() {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
 }
