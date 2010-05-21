@@ -17,12 +17,13 @@ public class Board {
         text = "";
     }
 
-    public void set(Point p, Piece piece) {
+    public boolean set(Point p, Piece piece) {
         piece.setPos(new Point(p));
         if(table.containsKey(p.x)) {
             Hashtable row = (Hashtable) table.get(p.x);
             if(row.containsKey(p.y)) {
                 System.out.println("There is already a piece in " + p.x + "," + p.y +"\n");
+                return false;
             } else {
                 System.out.println("Inserting piece " + piece.toString() + " to "  + p.x + "," + p.y +"\n");
                 row.put(p.y, piece);
@@ -33,6 +34,7 @@ public class Board {
             System.out.println("Inserting piece " + piece.toString() + " to "  + p.x + "," + p.y +"\n");
             row.put(p.y, piece);
         }
+        return true;
     }
 
     public int getWinner() {

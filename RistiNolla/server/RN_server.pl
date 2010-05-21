@@ -79,14 +79,17 @@ sub factory_success {
 sub client_input {
     my ($input, $wheel_id) = @_[ARG0, ARG1];
 
-    my $game = $_[HEAP]->{games_by_client}->{ $wheel_id };
-    my @other_clients = (
-        grep { $_->ID != $wheel_id }
-        @{$game->{clients}}
-    );
+    print( (map{sprintf "%x", ord($_)} split//, $input), "\n" );
 
-    for my $client (@other_clients) {
-        $_[HEAP]->{clients}->{ $client->ID }->put( $input );
+    if (my $game = $_[HEAP]->{games_by_client}->{ $wheel_id }) {
+	my @other_clients = (
+	    grep { $_->ID != $wheel_id }
+	    @{$game->{clients}}
+        );
+
+	for my $client (@other_clients) {
+	    $_[HEAP]->{clients}->{ $client->ID }->put( $input );
+	}
     }
 }
 
@@ -106,7 +109,7 @@ sub cleanup {
 
     my $fc = $_[HEAP]->{free_clients};
     FC_LOOP: for my $n (0 .. @$fc) {
-        if ( $deleted{ $fc->[$n]->ID } ) {
+        if ( $fc->[$n] and $deleted{ $fc->[$n] } ) {
             splice(@{$fc->[$n]}, 1, 1);
             last FC_LOOP;
         }

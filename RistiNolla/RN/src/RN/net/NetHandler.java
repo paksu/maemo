@@ -35,8 +35,16 @@ public class NetHandler implements Runnable {
         thread = null;
     }
 
-    public void send(Packet p) throws IOException {
-        output.write(p.toBuffer());
+    public boolean send(Packet p) {
+        try {
+            output.write(p.toBuffer());
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            // XXX emit alert
+            // parent.alert("ERROR: foobar");
+            return false;
+        }
+        return true;
     }
 
     public void run() {

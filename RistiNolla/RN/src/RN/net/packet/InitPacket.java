@@ -35,4 +35,8 @@ public class InitPacket extends Packet {
     static Packet fromBufer(byte[] buffer) throws Exception {
         return new InitPacket(0xff & buffer[1]);
     }
+
+    public byte[] toBuffer() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

@@ -78,6 +78,7 @@ public class RNGame extends Canvas implements CommandListener {
                 break;
             case -5: // ENTER
                 insertPiece(center);
+                net.send(new TurnPacket(center));
                 if(board.getWinner() != -1) {
                     System.out.println("WINNER IS " + board.getWinner());
                 }
@@ -112,6 +113,8 @@ public class RNGame extends Canvas implements CommandListener {
                 return;
             }
             TurnPacket packet = (TurnPacket)arg;
+            Point point = new Point(packet.x, packet.y);
+            insertPiece(point);
             // XXX do stuffz
         }
         
@@ -128,12 +131,13 @@ public class RNGame extends Canvas implements CommandListener {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    public void insertPiece(Point p) {
+    public boolean insertPiece(Point p) {
         if(myRole != InitPacket.TYPE_UNDEFINED || state != RNGame.STATE_TURN){
             Piece piece = new Piece(myRole);
-            board.set(p, piece);
+            return board.set(p, piece);
         } else {
             System.out.println("Error in insertPiece myRole:" + myRole + "and state" + state);
+            return false;
         }
     }
     

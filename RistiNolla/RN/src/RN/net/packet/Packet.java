@@ -1,6 +1,6 @@
 package RN.net.packet;
 
-public class Packet {
+abstract public class Packet {
     public static final int BUFFER_LENGTH = 9;
     public static Packet fromBuffer(byte[] buffer) throws Exception {
         int type = 0xff & buffer[0];
@@ -16,7 +16,5 @@ public class Packet {
         return result;
     }
 
-    public int toBuffer() {
-        throw new UnsupportedOperationException("Not yet implemented");
-    }
+    abstract public byte[] toBuffer();
 }
