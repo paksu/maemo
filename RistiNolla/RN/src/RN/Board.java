@@ -13,15 +13,15 @@ public class Board {
     public Board(RNGame game) {
         parent = game;
         cursor = new Point(0,0);
-        set(new Point(1,0), new Piece(1));
+        /*set(new Point(1,0), new Piece(1));
         set(new Point(0,0), new Piece(0));
         set(new Point(2,0), new Piece(1));
-        set(new Point(3,0), new Piece(0));
+        set(new Point(3,0), new Piece(0));*/
 
     }
 
     public void set(Point p, Piece piece) {
-        piece.setPos(p);
+        piece.setPos(new Point(p));
         if(table.containsKey(p.x)) {
             Hashtable row = (Hashtable) table.get(p.x);
             if(row.containsKey(p.y)) {
@@ -46,47 +46,42 @@ public class Board {
 
                 Point pos   = piece.getPos();
                 int type    = piece.getType();
-                for (int i = 1; i <= 5; i++) {
-                    Point matchPos   = new Point(pos.x.intValue() + i, pos.y.intValue());
-                    Piece matchPiece = get(matchPos);
-                    if (matchPiece == null) {
-                        break;
+                for (int dir = 0; dir < 4; dir++) {
+                    System.out.print(piece + " dir: " + dir + " : "+ pos +" |||");
+                    for (int i = 1; i < 5; i++) {
+                        System.out.print(" | "+i);
+                        Point matchPos = null;
+                        switch (dir) {
+                            case 0:
+                                matchPos = new Point(pos.x.intValue() + i, pos.y.intValue());
+                                break;
+                            case 1:
+                                matchPos = new Point(pos.x.intValue(), pos.y.intValue() + i);
+                                break;
+                            case 2:
+                                matchPos = new Point(pos.x.intValue() + i, pos.y.intValue() + i);
+                                break;
+                            case 3:
+                                matchPos = new Point(pos.x.intValue() + i, pos.y.intValue() - i);
+                                break;
+                        }
+
+                        Piece matchPiece = get(matchPos);
+                        if (matchPiece == null) {
+                            System.out.print(matchPos + " mp = null");
+                            break;
+                        }
+                        int matchType = matchPiece.getType();
+                        if (matchType != type) {
+                            System.out.print(matchPos + " mt = null");
+                            break;
+                        }
+                        if (i == 4) {
+                            return piece.getType();
+                        }
                     }
-                    int matchType    = matchPiece.getType();
-                    if (matchType != type) {
-                        break;
-                    }
-                    if (i == 5) {
-                        return piece.getType();
-                    }
-                }
-                for (int i = 1; i <= 5; i++) {
-                    Point matchPos   = new Point(pos.x.intValue(), pos.y.intValue() + i);
-                    Piece matchPiece = get(matchPos);
-                    if (matchPiece == null) {
-                        break;
-                    }
-                    int matchType    = matchPiece.getType();
-                    if (matchType != type) {
-                        break;
-                    }
-                    if (i == 5) {
-                        return piece.getType();
-                    }
-                }
-                for (int i = 1; i <= 5; i++) {
-                    Point matchPos   = new Point(pos.x.intValue() + i, pos.y.intValue() + i);
-                    Piece matchPiece = get(matchPos);
-                    if (matchPiece == null) {
-                        break;
-                    }
-                    int matchType    = matchPiece.getType();
-                    if (matchType != type) {
-                        break;
-                    }
-                    if (i == 5) {
-                        return piece.getType();
-                    }
+                    System.out.print("\n");
+
                 }
             }
         }

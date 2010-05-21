@@ -7,4 +7,12 @@ public class Point {
         x = new Integer(X);
         y = new Integer(Y);
     }
+
+    Point(Point p) {
+        x = p.x;
+        y = p.y;
+    }
+    public String toString() {
+        return "Point:["+x+","+y+"]";
+    }
 }
