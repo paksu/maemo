@@ -79,7 +79,7 @@ sub factory_success {
 sub client_input {
     my ($input, $wheel_id) = @_[ARG0, ARG1];
 
-    print( (map{sprintf "%x", ord($_)} split//, $input), "\n" );
+    print( (map{sprintf "%02x", ord($_)} split//, $input), "\n" );
 
     if (my $game = $_[HEAP]->{games_by_client}->{ $wheel_id }) {
 	my @other_clients = (
@@ -96,12 +96,18 @@ sub client_input {
 sub cleanup {
     my $wheel_id = $_[ARG3];
 
+    print Dumper {
+	games => $_[HEAP]->{games_by_client},
+	free_clients => $_[HEAP]->{free_clients},
+    };
+
     delete $_[HEAP]->{clients}->{ $wheel_id };
     my $game = $_[HEAP]->{games_by_client}->{ $wheel_id };
     my %deleted;
     if ($game) {
         for my $c (@{$game->{clients}}) {
             $deleted{ $c->ID } = 1;
+	    delete $_[HEAP]->{clients}->{ $c->ID };
             delete $_[HEAP]->{games_by_client}->{ $c->ID };
         }
         delete $_[HEAP]->{games}->{ $game->ID };
@@ -109,11 +115,15 @@ sub cleanup {
 
     my $fc = $_[HEAP]->{free_clients};
     FC_LOOP: for my $n (0 .. @$fc) {
-        if ( $fc->[$n] and $deleted{ $fc->[$n] } ) {
-            splice(@{$fc->[$n]}, 1, 1);
+        if ( $fc->[$n] and $fc->[$n]->ID == $wheel_id ) {
+            splice(@$fc, $n, 1);
             last FC_LOOP;
         }
     }
+    print Dumper {
+	games => $_[HEAP]->{games_by_client},
+	free_clients => $_[HEAP]->{free_clients},
+    };
 }
 
 
