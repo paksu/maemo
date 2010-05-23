@@ -9,7 +9,7 @@ import javax.microedition.io.Connector;
 import javax.microedition.io.SocketConnection;
 
 public class NetHandler implements Runnable {
-    public static final String serverAddr = "socket://localhost:1234";
+    public static final String serverAddr = "socket://potti.ath.cx:1234";
     
     private SocketConnection conn;
     private InputStream input;
