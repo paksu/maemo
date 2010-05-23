@@ -103,7 +103,7 @@ public class Ristinolla extends MIDlet implements CommandListener {
                 // write pre-action user code here
                 switchDisplayable(null, getRnGame1());//GEN-LINE:|7-commandAction|4|24-postAction
                 // write post-action user code here
-                System.out.println("asdasdasd");
+                getRnGame1().init();
             }//GEN-BEGIN:|7-commandAction|5|38-preAction
         } else if (displayable == rnGame1) {
             if (command == exitCommand2) {//GEN-END:|7-commandAction|5|38-preAction
@@ -214,6 +214,8 @@ public class Ristinolla extends MIDlet implements CommandListener {
 //GEN-LINE:|32-getter|1|32-postInit
             // write post-init user code here
             rnGame1 = new RNGame("foo");
+            rnGame1.addCommand(getExitCommand2());
+            rnGame1.setCommandListener(this);
         }//GEN-BEGIN:|32-getter|2|
         return rnGame1;
     }

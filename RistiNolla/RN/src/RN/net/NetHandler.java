@@ -40,8 +40,7 @@ public class NetHandler implements Runnable {
             output.write(p.toBuffer());
         } catch (IOException ex) {
             ex.printStackTrace();
-            // XXX emit alert
-            // parent.alert("ERROR: foobar");
+            parent.getBoard().setText("ERROR: can't send packet");
             return false;
         }
         return true;
@@ -54,8 +53,7 @@ public class NetHandler implements Runnable {
             output = conn.openDataOutputStream();
         } catch (IOException ex) {
             ex.printStackTrace();
-            // XXX emit alert
-            // parent.alert("ERROR: foobar");
+            parent.getBoard().setText("ERROR: " + ex.getMessage());
             return;
         }
 
@@ -63,40 +61,33 @@ public class NetHandler implements Runnable {
         byte[] buffer = new byte[BUFFER_LENGTH];
         int offset = 0;
         while (running) {
-            System.out.println("while()");
            
             if (offset < Packet.BUFFER_LENGTH) {
-                System.out.println("<read>");
                 try {
                     int len = input.read(buffer, offset, BUFFER_LENGTH - offset);
                     if (len == -1) {
                         throw new IOException("Connection closed");
                     }
                     offset += len;
-                    System.out.println("readlen: " + len + " " + buffer[0] +":"+ buffer[1]);
                 } catch (IOException ex) {
                     ex.printStackTrace();
-                    // parent.alert(XXX);
+                    parent.getBoard().setText("ERROR: " + ex.getMessage());
                     return;
                 }
-                System.out.println("</read>");
             }
             else {
-                System.out.println("build");
                 Packet p;
                 try {
                     p = Packet.fromBuffer(buffer);
                 } catch (Exception ex) {
                     ex.printStackTrace();
-                    // XXX emit alert
-                    // parent.alert("ERROR: foobar");
+                    parent.getBoard().setText("ERROR: " + ex.getMessage());
                     return;
                 }
                 System.arraycopy(buffer, Packet.BUFFER_LENGTH,
                                  buffer, 0, Packet.BUFFER_LENGTH);
                 offset -= Packet.BUFFER_LENGTH;
 
-                System.out.println("update()");
                 parent.update(p);
             }
 

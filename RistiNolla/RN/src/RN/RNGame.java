@@ -9,7 +9,6 @@ import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.CommandListener;
 import javax.microedition.lcdui.Displayable;
 import javax.microedition.lcdui.Graphics;
-import javax.microedition.lcdui.Item;
 
 
 public class RNGame extends Canvas implements CommandListener {
@@ -27,35 +26,15 @@ public class RNGame extends Canvas implements CommandListener {
 
     int myRole = InitPacket.TYPE_UNDEFINED;
     Board board;
+
+    public Board getBoard() {
+        return board;
+    }
+
     Point center;
     int state;
 
-    RNGame(String title) {
-        net = new NetHandler(this);
-        net.start();
-        setCommandListener(this);
-        board = new Board(this);
-        center = new Point(0,0);
-        myRole = InitPacket.TYPE_UNDEFINED;
-        state = RNGame.STATE_INITIALIZING;
-        board.setText("Waiting for other player");
-    }
-
-    protected int getMinContentWidth() {
-        return 221;
-    }
-
-    protected int getMinContentHeight() {
-        return 221;
-    }
-
-    protected int getPrefContentWidth(int height) {
-        return 221;
-    }
-
-    protected int getPrefContentHeight(int width) {
-        return 221;
-    }
+    RNGame(String title) { }
 
     protected void keyPressed(int keyCode) {
         System.out.println(keyCode);
@@ -89,14 +68,6 @@ public class RNGame extends Canvas implements CommandListener {
         System.out.println(center.x + "," + center.y);
 
         repaint();
-    }
-
-    public void commandAction(Command c, Item item) {
-        // move cursor in grid and send answer over net
-    }
-
-    public void setCenter(Point newCenter) {
-
     }
 
     public void update(Packet arg) {
@@ -145,10 +116,6 @@ public class RNGame extends Canvas implements CommandListener {
 
     }
 
-    public void commandAction(Command c, Displayable d) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
     public boolean insertPiece(Point p, int type) {
         System.out.println("Type is " + type + " myRole is " + myRole);
         if(myRole != InitPacket.TYPE_UNDEFINED && state == RNGame.STATE_TURN && type == myRole){
@@ -164,6 +131,18 @@ public class RNGame extends Canvas implements CommandListener {
             System.out.println("Error in insertPiece type:" + type + " and myRole:" + myRole + "and state" + state);
             return false;
         }
+    }
+
+    public void commandAction(Command c, Displayable d) { }
+
+    void init() {
+        net = new NetHandler(this);
+        net.start();
+        board = new Board(this);
+        center = new Point(0,0);
+        myRole = InitPacket.TYPE_UNDEFINED;
+        state = RNGame.STATE_INITIALIZING;
+        board.setText("Waiting for other player");
     }
 
     

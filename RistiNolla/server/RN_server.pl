@@ -96,11 +96,6 @@ sub client_input {
 sub cleanup {
     my $wheel_id = $_[ARG3];
 
-    print Dumper {
-	games => $_[HEAP]->{games_by_client},
-	free_clients => $_[HEAP]->{free_clients},
-    };
-
     delete $_[HEAP]->{clients}->{ $wheel_id };
     my $game = $_[HEAP]->{games_by_client}->{ $wheel_id };
     my %deleted;
@@ -120,10 +115,6 @@ sub cleanup {
             last FC_LOOP;
         }
     }
-    print Dumper {
-	games => $_[HEAP]->{games_by_client},
-	free_clients => $_[HEAP]->{free_clients},
-    };
 }
 
 
