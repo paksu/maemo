@@ -2,7 +2,6 @@ package RN;
 
 import java.util.Enumeration;
 import java.util.Hashtable;
-import javax.microedition.lcdui.Command;
 import javax.microedition.lcdui.Graphics;
 
 public class Board {
@@ -49,7 +48,7 @@ public class Board {
     /**
      * Method to determine if someone has won the game
      * 
-     * @return Return -1 if a winner is found
+     * @return Return -1 if a winner is not found, otherwise return winner
      */
     public int getWinner() {
         for (Enumeration en1 = table.elements(); en1.hasMoreElements();) {
@@ -95,12 +94,6 @@ public class Board {
         return -1;
     }
 
-    /**
-     * Unused
-     */
-    public boolean gameOver() {
-        return false;
-    }
     /**
      * Paints the board and calls each piece on the board to draw itself
      *
@@ -161,12 +154,6 @@ public class Board {
         return null;
     }
 
-    /**
-     * Unused
-     */
-    public void moveCursor(Command c) {
-
-    }
     /**
      * Set a string on the bottom of the screen
      * 

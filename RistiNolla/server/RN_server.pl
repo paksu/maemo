@@ -1,65 +1,65 @@
-#!/usr/bin/perl
+#!/usr/bin/perl                                                                                                 
 
 use warnings;
-use strict;
+use strict;  
 
 use lib "$ENV{HOME}/lib";
 
 use POE;
 use POE::Wheel::SocketFactory;
-use POE::Wheel::ReadWrite;
-use POE::Driver::SysRW;
-use POE::Component::SSLify;
+use POE::Wheel::ReadWrite;    
+use POE::Driver::SysRW;       
 
 use Data::Dumper;
 
-
+# Luo uusi POE::Session, ja liitetään tähän asianmukaiset callback-funktiot
 POE::Session->create(
     inline_states => {
-        _start      => \&start,
+        _start          => \&start,
         factory_success => \&factory_success,
-        client_input  => \&client_input,
-        client_error  => \&cleanup, 
-        fatal_error   => \&cleanup,
-        _stop       => sub {},
-    },
-);
+        client_input    => \&client_input,
+        client_error    => \&cleanup,
+        fatal_error     => \&cleanup,
+        _stop           => sub {},
+    },                                       
+);                                           
 
 exit POE::Kernel->run();
 
 
 
 
-
+# sessio käynnistettiin, aletaan kuunetelemaan porttia 1234
 sub start {
     $_[HEAP]->{factory} =
         POE::Wheel::SocketFactory->new(
             BindAddress    => '0.0.0.0',
             BindPort       => '1234',
             SuccessEvent   => 'factory_success',
-            FailureEvent   => 'fatal_error',
-            SocketProtocol => 'tcp',
-            Reuse          => 'on',
-        );
-}
+            FailureEvent   => 'fatal_error',    
+            SocketProtocol => 'tcp',            
+            Reuse          => 'on',             
+        );                                      
+}                                               
 
+# uusi yhteys
 sub factory_success {
     my $handle = $_[ARG0];
 
     my $wheel =
         POE::Wheel::ReadWrite->new(
-            Handle     => $handle,
+            Handle     => $handle, 
             Driver     => POE::Driver::SysRW->new(),
-            InputEvent => 'client_input',
-            ErrorEvent => 'client_error',
+            InputEvent => 'client_input',           
+            ErrorEvent => 'client_error',           
             Filter     => POE::Filter::RNFilter->new(),
-        );
-    $_[HEAP]->{clients}->{ $wheel->ID } = $wheel;
-    $_[HEAP]->{free_clients} ||= [];
+        );                                             
+    $_[HEAP]->{clients}->{ $wheel->ID } = $wheel;      
+    $_[HEAP]->{free_clients} ||= [];                   
 
 
     my $fc = $_[HEAP]->{free_clients};
-    push @$fc, $wheel;
+    push @$fc, $wheel;                
 
     my $count = @$fc;
 
@@ -69,32 +69,36 @@ sub factory_success {
         my $new_game = RNGame->new(clients => \@clients);
 
         $_[HEAP]->{games}->{ $new_game->ID } = $new_game;
-        
-        for (@clients) {
+                                                         
+        for (@clients) {                                 
             $_[HEAP]->{games_by_client}->{ $_->ID } = $new_game;
-        }
-    }
-}
+        }                                                       
+    }                                                           
+}                                                               
 
+# vastaanotettu dataa joltain asiakkaalta
+# ohjaa datan oikeaan paikkaan
 sub client_input {
     my ($input, $wheel_id) = @_[ARG0, ARG1];
 
     print( (map{sprintf "%02x", ord($_)} split//, $input), "\n" );
 
     if (my $game = $_[HEAP]->{games_by_client}->{ $wheel_id }) {
-	my @other_clients = (
-	    grep { $_->ID != $wheel_id }
-	    @{$game->{clients}}
-        );
+        my @other_clients = (
+            grep { $_->ID != $wheel_id }
+            @{$game->{clients}}
+            );
 
-	for my $client (@other_clients) {
-	    $_[HEAP]->{clients}->{ $client->ID }->put( $input );
-	}
+        for my $client (@other_clients) {
+            $_[HEAP]->{clients}->{ $client->ID }->put( $input );
+        }
     }
 }
 
+# joku asiaskas katkaisi yhteyden
 sub cleanup {
     my $wheel_id = $_[ARG3];
+    print "cleanup $wheel_id\n";
 
     delete $_[HEAP]->{clients}->{ $wheel_id };
     my $game = $_[HEAP]->{games_by_client}->{ $wheel_id };
@@ -102,23 +106,25 @@ sub cleanup {
     if ($game) {
         for my $c (@{$game->{clients}}) {
             $deleted{ $c->ID } = 1;
-	    delete $_[HEAP]->{clients}->{ $c->ID };
+            delete $_[HEAP]->{clients}->{ $c->ID };
             delete $_[HEAP]->{games_by_client}->{ $c->ID };
         }
         delete $_[HEAP]->{games}->{ $game->ID };
     }
 
     my $fc = $_[HEAP]->{free_clients};
-    FC_LOOP: for my $n (0 .. @$fc) {
-        if ( $fc->[$n] and $fc->[$n]->ID == $wheel_id ) {
-            splice(@$fc, $n, 1);
-            last FC_LOOP;
-        }
-    }
+
+  FC_LOOP: for my $n (0 .. @$fc) {
+      if ( $fc->[$n] and $fc->[$n]->ID == $wheel_id ) {
+          splice(@$fc, $n, 1);
+          last FC_LOOP;
+      }
+  }
 }
 
 
 package RNGame;
+# yksinkertainen luokka, joka ryhmittää pelaajat peliin
 
 use Data::Dumper;
 
@@ -135,6 +141,7 @@ sub new {
     return $self;
 }
 
+# genereoi tunnisteen tälle pelille
 sub ID {
     my ($self) = @_;
     return join ':', @{$self->{clients}};
@@ -143,13 +150,13 @@ sub ID {
 
 
 package POE::Filter::RNFilter;
-# slices incomming stuff into 9 byte chunks
-# sends data out as is
-sub new { 
+# POE::Filter, joka
+# katkoo sisääntulevan datan 9 tavun pätkiin
+# lähettää ulosmenevän datan sellaisenaan ulos
+
+sub new {
     my $class = shift;
-    my $self = bless {}, $class;
-    $self->{queue} = '';
-    return $self;
+    return { queue => '', @_ }, $class;
 }
 
 sub get {
