@@ -13,8 +13,16 @@ import javax.microedition.lcdui.Graphics;
 
 public class RNGame extends Canvas implements CommandListener {
 
+    /**
+     * Allowed types of pieces [0,1]
+     */
     public static final int PIECE_X = 0;
     public static final int PIECE_O = 1;
+
+
+    /**
+     * Allowed states of the game [0,3] 
+     */
     public static final int STATE_INITIALIZING = 0; // waiting other player etc
     public static final int STATE_TURN = 1;         // own turn
     public static final int STATE_WAITING = 2;      // waiting for next turn
@@ -38,6 +46,11 @@ public class RNGame extends Canvas implements CommandListener {
     int state;
 
     RNGame(String title) { }
+    /**
+     * Handles commands from the user and reacts to them accordingly. Always calls repaint() method inherited from the Canvas-class. If new piece is set inserts it to the Board-object and sends a Turn packet.
+     *
+     * @param keyCode the keycode of the button pressed
+     */
 
     protected void keyPressed(int keyCode) {
         System.out.println(keyCode);
@@ -72,7 +85,11 @@ public class RNGame extends Canvas implements CommandListener {
 
         repaint();
     }
-
+    /**
+     * Called from NetHandler
+     *
+     * @param arg The packet from NetHandler
+     */
     public void update(Packet arg) {
         System.out.println("Received " + arg);
 
@@ -113,12 +130,25 @@ public class RNGame extends Canvas implements CommandListener {
         //chat.setString(packet.toString());
     }
 
+    /**
+     * Calls the paint method from board to redraw the whole board
+     *
+     * @param g Handle to graphics object
+     */
     protected void paint(Graphics g) {
          // Paint a square board
          board.paint(g, center, getWidth(), getWidth());
 
     }
 
+    /**
+     * Handles the logic of inserting piece according to the current game state and board state. May be called from keyPressed when user tries to insert a new piece or from update when a turn packet is recieved.
+     *
+     * @param p Cordinates where the piece is supposed to be insterted
+     * @param type Type of the piece.
+     *
+     * @return returns True if insert is successful, else false
+     */
     public boolean insertPiece(Point p, int type) {
         System.out.println("Type is " + type + " myRole is " + myRole);
         if(myRole != InitPacket.TYPE_UNDEFINED && state == RNGame.STATE_TURN && type == myRole){
@@ -136,8 +166,14 @@ public class RNGame extends Canvas implements CommandListener {
         }
     }
 
+    /**
+     * Unused
+     */
     public void commandAction(Command c, Displayable d) { }
 
+    /**
+     * Initializes a new game to be ready for an Init packet
+     */
     void init() {
         net = new NetHandler(this);
         net.start();
