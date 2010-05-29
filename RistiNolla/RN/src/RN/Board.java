@@ -10,13 +10,23 @@ public class Board {
     private RNGame parent;
     private Point cursor;
     private String text;
-
+    /**
+     * Constructor for Board
+     *
+     * @param game Parent RNGame needed for this class so it can some data needed for drawing
+     */
     public Board(RNGame game) {
         parent = game;
         cursor = new Point(0,0);
         text = "";
     }
-
+    /**
+     * Insert a new piece on the board
+     *
+     * @param p Cordinates of the pice
+     * @param piece Piece to insert to the given cordinates
+     * @return Returns true if insert is successful, else false
+     */
     public boolean set(Point p, Piece piece) {
         piece.setPos(new Point(p));
         if(table.containsKey(p.x)) {
@@ -36,7 +46,11 @@ public class Board {
         }
         return true;
     }
-
+    /**
+     * Method to determine if someone has won the game
+     * 
+     * @return Return -1 if a winner is found
+     */
     public int getWinner() {
         for (Enumeration en1 = table.elements(); en1.hasMoreElements();) {
             Hashtable h = (Hashtable) en1.nextElement();
@@ -81,9 +95,20 @@ public class Board {
         return -1;
     }
 
+    /**
+     * Unused
+     */
     public boolean gameOver() {
         return false;
     }
+    /**
+     * Paints the board and calls each piece on the board to draw itself
+     *
+     * @param g Handle to the drawing object
+     * @param center Cordinates to the point which the player has centered his view on i.e. the cordinates of the cursor
+     * @param w Width of the grid
+     * @param h Height of the grid
+     */
 
     void paint(Graphics g, Point center, int w, int h) {
         // clear screen
@@ -117,6 +142,14 @@ public class Board {
         g.drawString(text, 10, h + 10, 0);
     }
 
+    /**
+     *
+     * Get a piece on a specific location
+     * @param x X-cordinate of the grid
+     * @param y Y-cordinate of the gid
+     *
+     * @return Returns the Piece at the given location if there is one, else returns null
+     */
     public Piece get(int x, int y) {
         if(table.containsKey(new Integer(x))) {
             Hashtable row = (Hashtable) table.get(new Integer(x));
@@ -128,17 +161,34 @@ public class Board {
         return null;
     }
 
+    /**
+     * Unused
+     */
     public void moveCursor(Command c) {
 
     }
-    
+    /**
+     * Set a string on the bottom of the screen
+     * 
+     * @param s String to show
+     */
     public void setText(String s){
         text = s;
     }
+    /**
+     * Clear the text from the bottom of the screen
+     */
     public void clearText(){
         text = "";
     }
 
+    /**
+     *
+     * Get a piece on a specific location
+     * @param p The cordinates on the grid. 
+     *
+     * @return Returns the Piece at the given location if there is one, else returns null
+     */
     public Piece get(Point p) {
         return get(p.x.intValue(), p.y.intValue());
     }
