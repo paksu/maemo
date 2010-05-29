@@ -17,7 +17,6 @@ public class InitPacket extends Packet {
             default:
                 throw new Exception("Wrong type");
         }
-        System.out.println("new init " + this.type);
     }
 
     public int getType() {
@@ -31,11 +30,20 @@ public class InitPacket extends Packet {
                 "]";
     }
 
-
+    /**
+     * Generoi InitPacket-olion
+     * @param buffer
+     * @return
+     * @throws Exception
+     */
     static Packet fromBufer(byte[] buffer) throws Exception {
         return new InitPacket(0xff & buffer[1]);
     }
 
+    /**
+     * Toteutus puuttuu -- Asiakasohjelmat eivät generoi InitPakettia
+     * @return
+     */
     public byte[] toBuffer() {
         throw new UnsupportedOperationException("Not supported yet.");
     }

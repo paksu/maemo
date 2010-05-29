@@ -23,6 +23,9 @@ public class NetHandler implements Runnable {
         this.parent = parent;
     }
 
+    /**
+     * Aloittaa uuden säikeen ja avaa yhteyden palvelimelle
+     */
     public void start() {
         thread = new Thread(this);
         thread.start();
@@ -30,11 +33,27 @@ public class NetHandler implements Runnable {
         running = true;
     }
 
+    /**
+     * Sulkee yhteyden palvelimelle, ja sammuttaa ajossa olevan säikeen
+     */
     public void stop() {
         running = false;
         thread = null;
+        try {
+            input.close();
+            output.close();
+            conn.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
+    /**
+     * Lähettää palvelimelle Packet-luokan toteuttavan olion
+     *
+     * @param packet
+     * @return success
+     */
     public boolean send(Packet p) {
         try {
             output.write(p.toBuffer());
@@ -46,6 +65,9 @@ public class NetHandler implements Runnable {
         return true;
     }
 
+    /**
+     * Taustalla toisessa säikeessä ajossa oleva verkkoa kuunteleva rutiini
+     */
     public void run() {
         try {
             conn = (SocketConnection) Connector.open(serverAddr);
@@ -72,6 +94,7 @@ public class NetHandler implements Runnable {
                 } catch (IOException ex) {
                     ex.printStackTrace();
                     parent.getBoard().setText("ERROR: " + ex.getMessage());
+                    stop();
                     return;
                 }
             }

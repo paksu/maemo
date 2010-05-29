@@ -110,6 +110,7 @@ public class Ristinolla extends MIDlet implements CommandListener {
                 // write pre-action user code here
                 switchDisplayable(null, getForm());//GEN-LINE:|7-commandAction|6|38-postAction
                 // write post-action user code here
+                getRnGame1().getNet().stop();
             }//GEN-BEGIN:|7-commandAction|7|7-postCommandAction
         }//GEN-END:|7-commandAction|7|7-postCommandAction
         // write post-action user code here

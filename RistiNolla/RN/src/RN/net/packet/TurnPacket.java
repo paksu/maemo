@@ -19,7 +19,16 @@ public class TurnPacket extends Packet {
         this.x = x;
         this.y = y;
     }
+    public TurnPacket(Point center) {
+        x = center.x.intValue();
+        y = center.y.intValue();
+    }
 
+    /**
+     * Generoi TurnPacket-olion
+     * @param buffer
+     * @return
+     */
     public static Packet fromBuffer(byte[] buffer) {
         int x = 0;
         int y = 0;
@@ -35,14 +44,14 @@ public class TurnPacket extends Packet {
         return new TurnPacket(x, y);
     }
 
-    public TurnPacket(Point center) {
-        x = center.x.intValue();
-        y = center.y.intValue();
-    }
     public String toString() {
         return "RNTurnPacket: [x: " + x + ", y: " + y + "]";
     }
 
+    /**
+     * TurnPakecketin serialisoija
+     * @return
+     */
     public byte[] toBuffer() {
         byte[] buffer = new byte[9];
         buffer[0] = 1;

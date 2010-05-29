@@ -30,6 +30,9 @@ public class RNGame extends Canvas implements CommandListener {
     public Board getBoard() {
         return board;
     }
+    public NetHandler getNet() {
+        return net;
+    }
 
     Point center;
     int state;
